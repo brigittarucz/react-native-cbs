@@ -1,5 +1,3 @@
-import Chat from "../screens/Chat";
-
 class ChatRoom {
     constructor(id, createdDate, name, image, chatMessages) {
         this.id = id;

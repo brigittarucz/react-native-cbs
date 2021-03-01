@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, FlatList, Text, Image, TextInput } from 'react-native';
-import { chatFromStyles, chatToStyles, chatStartStyles } from './ChatIndividualStyles';
+import { chatFromStyles, chatToStyles, chatStartStyles } from './styles';
 
 const ChatIndividual = (props) => {
     const {navigation, route} = props;

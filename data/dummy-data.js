@@ -16,6 +16,7 @@ export const CHATMESSAGES = [
     new ChatMessage(2, 3, new Date(), 'Ready for a poker night.', USERS[4], false),
 ];
 
+// Personal and organizations
 export const CHATROOMS = [
     new ChatRoom(1, new Date(2021, 0, 1, 2, 0, 0), 'CBS Surf', 'https://images.squarespace-cdn.com/content/v1/5ac621c3a9e0286371486130/1583852107583-R46KVCQNC1JI9BZ402SQ/ke17ZwdGBToddI8pDm48kDtTx1LlPk5SBKUcWqeR7ZJZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVHL5HH9wretojISqrQuMTHEbaDbh9TdKFrlV9FpoejYgHXwRKnkxJsTvdk5FIL-keU/111_logo.+new.jpg?format=1000w', CHATMESSAGES),
     new ChatRoom(2, new Date(2021, 0, 1, 2, 0, 0), 'CBS Students', 'https://images.squarespace-cdn.com/content/5ac621c3a9e0286371486130/1533580616892-VMYBZPR6G00SSZT2273C/32_logo.png?content-type=image%2Fpng', CHATMESSAGES),

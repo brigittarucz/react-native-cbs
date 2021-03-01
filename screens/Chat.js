@@ -8,10 +8,10 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Button,TouchableOpacity } from 'react-native';
 import { CHATROOMS } from './../data/dummy-data';
-import ChatRoom from '../components/ChatRoom';
-import ChatIndividual from '../components/ChatIndividual/ChatIndividual';
+import ChatRoom from '../components/ChatRoom/ChatRoom';
+import ChatConversation from '../components/ChatConversation/ChatConversation';
 
-const ChatGroups = props => {
+const ChatOrganization = props => {
     const navigation = useNavigation();
 
     return (
@@ -21,7 +21,30 @@ const ChatGroups = props => {
                 renderItem={itemData => (
                     <TouchableOpacity
                         onPress={() => 
-                            navigation.navigate('Chat Individual', {
+                            navigation.navigate('Chat Conversation', {
+                                item: itemData.item
+                            })
+                        } >
+                        <ChatRoom item={itemData.item} />
+                    </TouchableOpacity>
+                )}
+                keyExtractor={item => item.id.toString()}
+            />
+        </View>
+    );
+}
+
+const ChatPersonal = props => {
+    const navigation = useNavigation();
+
+    return (
+        <View>
+            <FlatList 
+                data={CHATROOMS}
+                renderItem={itemData => (
+                    <TouchableOpacity
+                        onPress={() => 
+                            navigation.navigate('Chat Conversation', {
                                 item: itemData.item
                             })
                         } >
@@ -77,8 +100,8 @@ const StackNav = () => {
             <Stack.Screen name="Chat Message" 
                         component={ChatMessage} 
                         />    
-            <Stack.Screen name="Chat Individual"
-                        component={ChatIndividual}
+            <Stack.Screen name="Chat Conversation"
+                        component={ChatConversation}
                         options={{
                             headerTitle: "Chat".toUpperCase(),
                             headerTintColor: "#5050A5",
@@ -126,7 +149,7 @@ const TopTabs = () => {
                 activeTintColor: "#5050A5",
                 inactiveTintColor: "#B7B7B7",
                 labelStyle: {
-                    fontSize: 20,
+                    fontSize: 18,
                     fontWeight: "bold"
                 },
                 barStyles: {
@@ -135,11 +158,11 @@ const TopTabs = () => {
                 
             }}>
             <Tab.Screen 
-                name="ChatGroups" 
-                component={ChatGroups} />
+                name="R. Jacobsen" 
+                component={ChatPersonal} />           
             <Tab.Screen 
-                name="ChatIndividual" 
-                component={ChatIndividual} />
+                name="CBS Surf" 
+                component={ChatOrganization} />
         </Tab.Navigator>
     )
 }
