@@ -9,7 +9,7 @@ import React from 'react';
 import { View, Text, StyleSheet, FlatList, Button,TouchableOpacity } from 'react-native';
 import { CHATROOMS } from './../data/dummy-data';
 import ChatRoom from '../components/ChatRoom';
-import ChatIndividual from '../components/ChatIndividual';
+import ChatIndividual from '../components/ChatIndividual/ChatIndividual';
 
 const ChatGroups = props => {
     const navigation = useNavigation();
@@ -43,42 +43,78 @@ const ChatMessage = props => {
 
 const StackNav = () => {
     const Stack = createStackNavigator();
+    const navigation = useNavigation();
+    return (
+        <Stack.Navigator initialRouteName="Chat">
+            <Stack.Screen name="Chat" 
+                        component={TopTabs}
+                        options={{
+                            headerTitle: "Chat".toUpperCase(),
+                            headerTintColor: "#5050A5",
+                            headerTitleAlign: 'center',
+                            headerTitleStyle: {
+                                fontWeight: "bold",
+                                fontSize: 20
+                            },
+                            headerStyle: {
+                                borderBottomColor: "white"
+                            },
+                            cardStyle: {
+                                backgroundColor: 'black',
+                                opacity: 1
+                            },
+                            headerRight: () => (
+                                <View style={{margin: 20}}>
+                                    <MaterialCommunityIcons
+                                        name="message-plus-outline"
+                                        color="#5050A5"
+                                        size="32px"
+                                    />
+                                </View>
+                            )
+                        }} 
+                        />
+            <Stack.Screen name="Chat Message" 
+                        component={ChatMessage} 
+                        />    
+            <Stack.Screen name="Chat Individual"
+                        component={ChatIndividual}
+                        options={{
+                            headerTitle: "Chat".toUpperCase(),
+                            headerTintColor: "#5050A5",
+                            headerTitleAlign: 'center',
+                            headerTitleStyle: {
+                                fontWeight: "bold",
+                                fontSize: 20
+                            },
+                            headerLeft: () => (
+                                <View style={{margin: 20, transform: [{rotate: '270deg'}]}}>
+                                    <MaterialCommunityIcons
+                                        name="apple-keyboard-control"
+                                        color="#5050A5"
+                                        size="32px"
+                                        onPress={() => navigation.goBack()}
+                                    />
+                                </View>
+                            ),
+                            headerStyle: {
+                                borderBottomColor: '#eee',
+                                shadowColor: "#000",
+                                shadowOffset: {
+                                    width: 0,
+                                    height: 2,
+                                },
+                                shadowOpacity: 0.30,
+                                shadowRadius: 5.00,
 
-  return (
-    <Stack.Navigator initialRouteName="Chat Individual">
-        <Stack.Screen name="Chat" 
-                      component={TopTabs}
-                      options={{
-                          headerTitle: "Chat".toUpperCase(),
-                          headerTintColor: "#5050A5",
-                          headerTitleAlign: 'center',
-                          headerTitleStyle: {
-                            fontWeight: "bold",
-                            fontSize: 20
-                          },
-                          headerStyle: {
-                            borderBottomColor: "white"
-                          },
-                          headerRight: () => (
-                              <View style={{margin: 20}}>
-                                <MaterialCommunityIcons
-                                    name="message-plus-outline"
-                                    color="#5050A5"
-                                    size="32px"
-                                />
-                              </View>
-                          )
-                      }} 
-                      />
-        <Stack.Screen name="Chat Message" 
-                      component={ChatMessage} 
-                      />    
-        <Stack.Screen name="Chat Individual"
-                      component={ChatIndividual}
-                      />
-    </Stack.Navigator>
-  )
-                                
+                                elevation: 10,
+                            },
+                            cardStyle: {
+                                backgroundColor: 'white',
+                                opacity: 1
+                            }}}/>
+        </Stack.Navigator>
+   )                         
 }
 
 const TopTabs = () => {
