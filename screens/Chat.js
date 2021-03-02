@@ -7,16 +7,16 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Button,TouchableOpacity } from 'react-native';
-import { CHATROOMS, PRIVATEUSERS } from './../data/dummy-data';
+import { CHATROOMS, USERS } from './../data/dummy-data';
 import ChatRoom from '../components/ChatRoom/ChatRoom';
 import ChatConversation from '../components/ChatConversation/ChatConversation';
 
 const Chat = props => {
     const navigation = useNavigation();
 
-    const loggedInUserPrivate = PRIVATEUSERS[0];
+    const loggedInUserPrivate = USERS[3];
     // Only one additional public identity for now
-    const loggedInUserPublic = PRIVATEUSERS[0].additionalPublicIdentities[0];
+    const loggedInUserPublic = USERS[loggedInUserPrivate.additionalPublicIdentities[0].id-1];
     var tabScreens = null;
 
     // Filter chatrooms by loggedInUserPrivate and loggedInUserPublic
@@ -28,9 +28,25 @@ const Chat = props => {
         chatroom : false
     ));
 
-    console.log(loggedInUserChatRooms);
     // Sanitize name and image by loggedInUserPrivate and loggedInUserPublic
-// check if image or arr
+    loggedInUserChatRooms.forEach(chatroom => {
+        if(chatroom.name[0].id == loggedInUserPublic.id ||
+           chatroom.name[0].id == loggedInUserPrivate.id)  {
+               chatroom.name = chatroom.name[1].name;
+        } else {
+            chatroom.name = chatroom.name[0].name;   
+        }
+
+        if(chatroom.image[0].id == loggedInUserPublic.id ||
+            chatroom.image[0].id == loggedInUserPrivate.id)  {
+                chatroom.image = chatroom.image[1].image;
+         } else {
+             chatroom.image = chatroom.image[0].image;   
+         }
+    })
+
+    // console.log(loggedInUserChatRooms);
+
     return (
         <View>
             {/* <FlatList 
@@ -139,15 +155,15 @@ const StackNav = () => {
 const TopTabs = () => {
     const Tab = createMaterialTopTabNavigator();
 
-    const loggedInUser = PRIVATEUSERS[0];
+    const loggedInUser = USERS[3];
     var tabScreens = null;
 
     if(loggedInUser.additionalPublicIdentities.length) {
-        tabScreens = loggedInUser.additionalPublicIdentities.map(publicUser => (
+        tabScreens = loggedInUser.additionalPublicIdentities.map(publicUserId => (
             <Tab.Screen 
-                name={publicUser.name} 
+                name={USERS[publicUserId.id-1].name} 
                 component={Chat}
-                publicUser={publicUser} />
+                publicUser={USERS[publicUserId.id-1]} />
         ))
     }
 
@@ -169,13 +185,9 @@ const TopTabs = () => {
                 name={loggedInUser.name} 
                 // Change chat
                 component={Chat} />           
-            {/* { tabScreens }        */}
+            { tabScreens }       
         </Tab.Navigator>
     )
 }
-
-const styles = StyleSheet.create({
-    
-});
 
 export default StackNav;
