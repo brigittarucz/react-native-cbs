@@ -7,7 +7,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import React from 'react';
 import { View, Text, StyleSheet, FlatList, Button,TouchableOpacity } from 'react-native';
-import { CHATROOMS } from './../data/dummy-data';
+import { CHATROOMS, PRIVATEUSERS } from './../data/dummy-data';
 import ChatRoom from '../components/ChatRoom/ChatRoom';
 import ChatConversation from '../components/ChatConversation/ChatConversation';
 
@@ -67,6 +67,7 @@ const ChatMessage = props => {
 const StackNav = () => {
     const Stack = createStackNavigator();
     const navigation = useNavigation();
+
     return (
         <Stack.Navigator initialRouteName="Chat">
             <Stack.Screen name="Chat" 
@@ -143,6 +144,19 @@ const StackNav = () => {
 const TopTabs = () => {
     const Tab = createMaterialTopTabNavigator();
 
+    const loggedInUser = PRIVATEUSERS[0];
+    var tabScreens = null;
+    
+    console.log(loggedInUser.accessToPublicUsers);
+    if(loggedInUser.accessToPublicUsers.length) {
+        tabScreens = loggedInUser.accessToPublicUsers.map(publicUser => (
+            <Tab.Screen 
+                name={publicUser.name} 
+                component={ChatOrganization}
+                publicUser={publicUser} />
+        ))
+    }
+
     return (
         <Tab.Navigator
             tabBarOptions={{
@@ -158,11 +172,9 @@ const TopTabs = () => {
                 
             }}>
             <Tab.Screen 
-                name="R. Jacobsen" 
+                name={loggedInUser.name} 
                 component={ChatPersonal} />           
-            <Tab.Screen 
-                name="CBS Surf" 
-                component={ChatOrganization} />
+            { tabScreens }
         </Tab.Navigator>
     )
 }
