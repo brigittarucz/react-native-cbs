@@ -11,12 +11,17 @@ import { CHATROOMS, PRIVATEUSERS } from './../data/dummy-data';
 import ChatRoom from '../components/ChatRoom/ChatRoom';
 import ChatConversation from '../components/ChatConversation/ChatConversation';
 
-const ChatOrganization = props => {
+const Chat = props => {
     const navigation = useNavigation();
 
+    const loggedInUser = PRIVATEUSERS[0];
+    var tabScreens = null;
+
+    console.log(CHATROOMS);
+// check if image or arr
     return (
         <View>
-            <FlatList 
+            {/* <FlatList 
                 data={CHATROOMS}
                 renderItem={itemData => (
                     <TouchableOpacity
@@ -29,30 +34,7 @@ const ChatOrganization = props => {
                     </TouchableOpacity>
                 )}
                 keyExtractor={item => item.id.toString()}
-            />
-        </View>
-    );
-}
-
-const ChatPersonal = props => {
-    const navigation = useNavigation();
-
-    return (
-        <View>
-            <FlatList 
-                data={CHATROOMS}
-                renderItem={itemData => (
-                    <TouchableOpacity
-                        onPress={() => 
-                            navigation.navigate('Chat Conversation', {
-                                item: itemData.item
-                            })
-                        } >
-                        <ChatRoom item={itemData.item} />
-                    </TouchableOpacity>
-                )}
-                keyExtractor={item => item.id.toString()}
-            />
+            /> */}
         </View>
     );
 }
@@ -141,18 +123,18 @@ const StackNav = () => {
    )                         
 }
 
+
 const TopTabs = () => {
     const Tab = createMaterialTopTabNavigator();
 
     const loggedInUser = PRIVATEUSERS[0];
     var tabScreens = null;
-    
-    console.log(loggedInUser.accessToPublicUsers);
-    if(loggedInUser.accessToPublicUsers.length) {
-        tabScreens = loggedInUser.accessToPublicUsers.map(publicUser => (
+
+    if(loggedInUser.additionalPublicIdentities.length) {
+        tabScreens = loggedInUser.additionalPublicIdentities.map(publicUser => (
             <Tab.Screen 
                 name={publicUser.name} 
-                component={ChatOrganization}
+                component={Chat}
                 publicUser={publicUser} />
         ))
     }
@@ -170,11 +152,12 @@ const TopTabs = () => {
                     backgroundColor: "green"
                 }
                 
-            }}>
+            }}> 
             <Tab.Screen 
                 name={loggedInUser.name} 
-                component={ChatPersonal} />           
-            { tabScreens }
+                // Change chat
+                component={Chat} />           
+            { tabScreens }       
         </Tab.Navigator>
     )
 }
