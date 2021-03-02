@@ -1,4 +1,4 @@
-class User {
+class PublicUser {
     constructor(id, name, email, password, image, title, chatNotification) {
         this.id = id;
         this.name = name;
@@ -10,4 +10,4 @@ class User {
     }
 }
 
-export default User;
+export default PublicUser;
