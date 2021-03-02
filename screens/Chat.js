@@ -6,12 +6,18 @@ import { useNavigation } from '@react-navigation/native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import React from 'react';
-import { View, Text, StyleSheet, FlatList, Button,TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Button, TouchableOpacity } from 'react-native';
 import { CHATROOMS, USERS } from './../data/dummy-data';
 import ChatRoom from '../components/ChatRoom/ChatRoom';
 import ChatConversation from '../components/ChatConversation/ChatConversation';
 
+import { useSelector } from 'react-redux';
+import SessionReducer from '../store/reducers/UserReducers';
+
 const Chat = props => {
+
+    const currentState = useSelector(state => state);
+    console.log(currentState);
     const navigation = useNavigation();
 
     const loggedInUserPrivate = USERS[3];
@@ -20,7 +26,7 @@ const Chat = props => {
     const loggedInUserPublic = USERS[loggedInUserPrivate.additionalPublicIdentities[0].id-1];
     var tabScreens = null;
 
-    console.log(props.chatrooms);
+    // console.log(props.chatrooms);
 
     // Filter chatrooms by loggedInUserPrivate and loggedInUserPublic
     const loggedInUserChatRooms = props.chatrooms.filter(chatroom => (
@@ -37,8 +43,6 @@ const Chat = props => {
             chatroom.name[1].id == loggedInUserPrivate.id ) {
                 chatroom.name = chatroom.name[0].name;
                 chatroom.image = chatroom.image[0].image;
-                console.log(chatroom.name)
-                console.log(chatroom.name[0].name)
         } else if (chatroom.name[1].id == loggedInUserPublic.id &&
             chatroom.name[0].id == loggedInUserPrivate.id ) {
                 chatroom.name = chatroom.name[1].name;

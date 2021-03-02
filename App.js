@@ -13,10 +13,14 @@ import Menu from './screens/Menu';
 
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import store from './store/StoreConfiguration';
+import { Provider } from 'react-redux';
+
 export default function App() {
   const Tab = createBottomTabNavigator();
 
   return (
+    <Provider store={store}>
       <NavigationContainer>
         <Tab.Navigator
           initialRouteName="Chat"
@@ -86,6 +90,7 @@ export default function App() {
           />
         </Tab.Navigator>
       </NavigationContainer>
+    </Provider>
   );
 }
 

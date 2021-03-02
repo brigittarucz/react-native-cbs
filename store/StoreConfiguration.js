@@ -1,11 +1,9 @@
 import { createStore, combineReducers } from 'redux';
-import CounterReducer from './reducers/CounterReducer';
+import UserReducer from './reducers/UserReducers';
 
 // We pass the reducer to that store
-// The combineReducer function combines all the different 
-// reducers into one and forms the global state.
 const rootReducer = combineReducers({
-    count: CounterReducer
+    UserReducer
 });
 
 const store = createStore(rootReducer);
