@@ -14,6 +14,9 @@ import ChatConversation from '../components/ChatConversation/ChatConversation';
 import { useSelector } from 'react-redux';
 import SessionReducer from '../store/reducers/UserReducers';
 
+// TODO: to be removed and moved in the right component - testing purposes
+import Login from './Login';
+
 const Chat = props => {
 
     const currentState = useSelector(state => state);
@@ -96,7 +99,9 @@ const StackNav = () => {
     const navigation = useNavigation();
 
     return (
-        <Stack.Navigator initialRouteName="Chat">
+        <Stack.Navigator initialRouteName="Login">
+            <Stack.Screen name="Login" 
+                        component={Login} />
             <Stack.Screen name="Chat" 
                         component={TopTabs}
                         options={{
