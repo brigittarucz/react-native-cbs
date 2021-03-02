@@ -14,10 +14,22 @@ import ChatConversation from '../components/ChatConversation/ChatConversation';
 const Chat = props => {
     const navigation = useNavigation();
 
-    const loggedInUser = PRIVATEUSERS[0];
+    const loggedInUserPrivate = PRIVATEUSERS[0];
+    // Only one additional public identity for now
+    const loggedInUserPublic = PRIVATEUSERS[0].additionalPublicIdentities[0];
     var tabScreens = null;
 
-    console.log(CHATROOMS);
+    // Filter chatrooms by loggedInUserPrivate and loggedInUserPublic
+    const loggedInUserChatRooms = CHATROOMS.filter(chatroom => (
+        chatroom.name[0].id == loggedInUserPublic.id ||
+        chatroom.name[0].id == loggedInUserPrivate.id ||
+        chatroom.name[1].id == loggedInUserPublic.id ||
+        chatroom.name[1].id == loggedInUserPrivate.id ?
+        chatroom : false
+    ));
+
+    console.log(loggedInUserChatRooms);
+    // Sanitize name and image by loggedInUserPrivate and loggedInUserPublic
 // check if image or arr
     return (
         <View>
@@ -157,7 +169,7 @@ const TopTabs = () => {
                 name={loggedInUser.name} 
                 // Change chat
                 component={Chat} />           
-            { tabScreens }       
+            {/* { tabScreens }        */}
         </Tab.Navigator>
     )
 }

@@ -2,13 +2,11 @@ class ChatRoom {
     constructor(id, createdDate, name, image, chatMessages, isPublicChat) {
         this.id = id;
         this.createdDate = createdDate;
-        this.name = typeof(name) == "string" ? name :
-            name.map(privateUser => ({
+        this.name = name.map(privateUser => ({
                 id: privateUser.id,
                 name: privateUser.name
             }));
-        this.image = typeof(image) == "string" ? image :
-            image.map(privateUser => ({
+        this.image = image.map(privateUser => ({
                 id: privateUser.id,
                 image: privateUser.image
             }));
