@@ -16,11 +16,14 @@ const Chat = props => {
 
     const loggedInUserPrivate = USERS[3];
     // Only one additional public identity for now
+    // TODO: pass through props loggedInUserPrivate & public
     const loggedInUserPublic = USERS[loggedInUserPrivate.additionalPublicIdentities[0].id-1];
     var tabScreens = null;
 
+    console.log(props.chatrooms);
+
     // Filter chatrooms by loggedInUserPrivate and loggedInUserPublic
-    const loggedInUserChatRooms = CHATROOMS.filter(chatroom => (
+    const loggedInUserChatRooms = props.chatrooms.filter(chatroom => (
         chatroom.name[0].id == loggedInUserPublic.id ||
         chatroom.name[0].id == loggedInUserPrivate.id ||
         chatroom.name[1].id == loggedInUserPublic.id ||
@@ -29,28 +32,38 @@ const Chat = props => {
     ));
 
     // Sanitize name and image by loggedInUserPrivate and loggedInUserPublic
-    loggedInUserChatRooms.forEach(chatroom => {
-        if(chatroom.name[0].id == loggedInUserPublic.id ||
-           chatroom.name[0].id == loggedInUserPrivate.id)  {
-               chatroom.name = chatroom.name[1].name;
-        } else {
-            chatroom.name = chatroom.name[0].name;   
-        }
-
-        if(chatroom.image[0].id == loggedInUserPublic.id ||
-            chatroom.image[0].id == loggedInUserPrivate.id)  {
+    for(const chatroom of loggedInUserChatRooms) {
+        if(chatroom.name[0].id == loggedInUserPublic.id &&
+            chatroom.name[1].id == loggedInUserPrivate.id ) {
+                chatroom.name = chatroom.name[0].name;
+                chatroom.image = chatroom.image[0].image;
+                console.log(chatroom.name)
+                console.log(chatroom.name[0].name)
+        } else if (chatroom.name[1].id == loggedInUserPublic.id &&
+            chatroom.name[0].id == loggedInUserPrivate.id ) {
+                chatroom.name = chatroom.name[1].name;
                 chatroom.image = chatroom.image[1].image;
-         } else {
-             chatroom.image = chatroom.image[0].image;   
-         }
-    })
-
-    // console.log(loggedInUserChatRooms);
+        } else {
+            if(chatroom.name[0].id == loggedInUserPublic.id ||
+                chatroom.name[0].id == loggedInUserPrivate.id)  {
+                    chatroom.name = chatroom.name[1].name;
+             } else {
+                 chatroom.name = chatroom.name[0].name;   
+             }
+     
+             if(chatroom.image[0].id == loggedInUserPublic.id ||
+                 chatroom.image[0].id == loggedInUserPrivate.id)  {
+                     chatroom.image = chatroom.image[1].image;
+              } else {
+                  chatroom.image = chatroom.image[0].image;   
+              }
+        } 
+    }
 
     return (
         <View>
-            {/* <FlatList 
-                data={CHATROOMS}
+            <FlatList 
+                data={loggedInUserChatRooms}
                 renderItem={itemData => (
                     <TouchableOpacity
                         onPress={() => 
@@ -62,7 +75,7 @@ const Chat = props => {
                     </TouchableOpacity>
                 )}
                 keyExtractor={item => item.id.toString()}
-            /> */}
+            />
         </View>
     );
 }
@@ -114,7 +127,7 @@ const StackNav = () => {
             <Stack.Screen name="Chat Conversation"
                         component={ChatConversation}
                         options={{
-                            headerTitle: "Chat".toUpperCase(),
+                            headerTitle: "Chat",
                             headerTintColor: "#5050A5",
                             headerTitleAlign: 'center',
                             headerTitleStyle: {
@@ -158,12 +171,17 @@ const TopTabs = () => {
     const loggedInUser = USERS[3];
     var tabScreens = null;
 
+    // Filter private and public chats
+    const publicChatRooms = CHATROOMS.filter(chatroom => chatroom.isPublicChat)
+    const privateChatRooms = CHATROOMS.filter(chatroom => !chatroom.isPublicChat)
+
     if(loggedInUser.additionalPublicIdentities.length) {
         tabScreens = loggedInUser.additionalPublicIdentities.map(publicUserId => (
             <Tab.Screen 
                 name={USERS[publicUserId.id-1].name} 
-                component={Chat}
-                publicUser={USERS[publicUserId.id-1]} />
+                publicUser={USERS[publicUserId.id-1]}
+                children={() => <Chat chatrooms={privateChatRooms}/>} 
+                />
         ))
     }
 
@@ -183,8 +201,8 @@ const TopTabs = () => {
             }}> 
             <Tab.Screen 
                 name={loggedInUser.name} 
-                // Change chat
-                component={Chat} />           
+                children={() => <Chat chatrooms={publicChatRooms}/>}
+                />           
             { tabScreens }       
         </Tab.Navigator>
     )
