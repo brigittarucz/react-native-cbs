@@ -2,19 +2,30 @@ import React from 'react';
 import { View, FlatList, Text, Image, TextInput } from 'react-native';
 import { chatFromStyles, chatToStyles, chatStartStyles } from './styles';
 import { USERS } from '../../data/dummy-data';
+const loggedInUserPrivate = 4;
 
 const ChatIndividual = (props) => {
     const {navigation, route} = props;
     if(route.params != undefined) {
-        console.log(route.params.item.chatMessages);
+        var messagesProps = route.params.item.chatMessages;
+        console.log(route.params.item.chatMessages)
+        // Todo: make it work for private users as well
+        // Todo: split users public and private and have a one on one
+
+        var messagesList = <FlatList
+            data={messagesProps}
+            renderItem={itemData => {
+                if (itemData.item.userFrom.id == loggedInUserPrivate) {
+                    return <ChatTo />
+                } else {
+                    return <ChatFrom />
+                }
+               
+            }}   /> 
     }
     var messages = 0
 
-    const loggedInUserPrivate = 4;
-    const loggedInUserPublic = 1;
 
-    console.log(loggedInUserPrivate)
-    console.log(loggedInUserPublic)
 
     // if(route.params != undefined) {
     //     console.log(route.params.item.chatMessages[0])
@@ -35,7 +46,7 @@ const ChatIndividual = (props) => {
         //     {messages}
         // </View>
         <View style={{height: '100%', width: '100%'}}>
-
+            { messagesList }
             
             <View style={chatStartStyles.start}>
                 <Image style={chatStartStyles.startImage} source='https://randomuser.me/api/portraits/women/0.jpg' />
