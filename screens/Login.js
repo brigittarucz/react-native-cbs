@@ -11,7 +11,7 @@ const Login = props => {
     
     
     const loginHandler = () => {
-        dispatch(userActions.logUserIn({user: USERS[0]}));
+        dispatch(userActions.logUserIn({user: USERS[3]}));
         navigation.navigate('Chat');
     }
 

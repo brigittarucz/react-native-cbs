@@ -118,7 +118,7 @@ const StackNav = () => {
     const navigation = useNavigation();
 
     return (
-        <Stack.Navigator initialRouteName="Chat">
+        <Stack.Navigator initialRouteName="Login">
             <Stack.Screen name="Login" 
                         component={Login} />
             <Stack.Screen name="Chat" 
