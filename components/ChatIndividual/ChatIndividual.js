@@ -1,5 +1,7 @@
+// Massive bug fixer
+import 'react-native-gesture-handler';
 import React from 'react';
-import { View, FlatList, Text, Image, TextInput, Button } from 'react-native';
+import { View, FlatList, Text, Image, TextInput, Button, TouchableOpacity } from 'react-native';
 import { chatFromStyles, chatToStyles, chatStartStyles } from './styles';
 import { USERS, CHATMESSAGES } from '../../data/dummy-data';
 import { useDispatch, useSelector } from 'react-redux';
@@ -25,9 +27,9 @@ const ChatIndividual = (props) => {
     )}, [props])
     
     var chatMessages = useSelector(state => state.ChatReducer.messages);
-
+         
     const sendMessageHandler = () => {
-        var newMessage = new ChatMessage(chatMessages.length, 1, new Date(), userInput, USERS[4], USERS[3], true)
+        var newMessage = new ChatMessage(chatMessages[chatMessages.length-1].id+1, 1, new Date(), userInput, USERS[4], USERS[3], true)
         chatMessages.push(newMessage);
         // Push new message to state
         dispatch(chatActions.setMessages(
@@ -40,8 +42,15 @@ const ChatIndividual = (props) => {
     const textChangeHandler = (event) => {
         setUserInput(event)
     }
-    
-    const deleteMessageHandler = (event)
+
+    const deleteMessageHandler = (id) => {
+        chatMessages = chatMessages.filter(message => message.id != (id+1));
+        dispatch(chatActions.setMessages(
+            {messages: chatMessages}
+        ))
+
+        setTriggerRerender(!triggerRerender)
+    }
 
     return (
         <View style={{height: '100%', width: '100%'}}>
@@ -49,11 +58,13 @@ const ChatIndividual = (props) => {
                 data={chatMessages}
                 extraData={triggerRerender}
                 renderItem={itemData => {
-                    console.log(itemData)
+                    // console.log(itemData)
                     if (itemData.item.userFrom.id == loggedInUserPrivate) {
-                        return <ChatTo />
+                        return <ChatTo data={itemData.item} key={itemData.index.toString()}/>
                     } else {
-                        return <ChatFrom />
+                        return  <TouchableOpacity key={itemData.index.toString()} onPress={() => deleteMessageHandler(itemData.index)}>
+                                    <ChatFrom data={itemData.item}/>
+                                </TouchableOpacity>
                     }
                 }}   
                 keyExtractor={item => item.id.toString()} /> 
@@ -71,7 +82,7 @@ const ChatIndividual = (props) => {
 const ChatTo = (props) => {
     return (
         <View style={chatToStyles.to}>
-            <Text style={chatToStyles.toMessage} >Sed ut perspiciatis unde omnis iste natus error sit voluptatem.</Text>
+            <Text style={chatToStyles.toMessage} >{props.data.message}</Text>
             <Text style={chatToStyles.toDate} >10:44</Text>
         </View>
     )
@@ -79,16 +90,16 @@ const ChatTo = (props) => {
 
 const ChatFrom = (props) => {
     return (
-        <View style={chatFromStyles.from} onPress={() => deleteMessageHandler()}>
-                <View style={chatFromStyles.fromContainer}>
-                    <Image style={chatFromStyles.fromImage} source='https://randomuser.me/api/portraits/women/0.jpg'/>
-                    <Text style={chatFromStyles.fromMessage}>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</Text>
-                </View>
-                <View style={chatFromStyles.fromContainerText}>
-                    <Text style={chatFromStyles.fromUser}>From Alexa Rollins</Text>
-                    <Text style={chatFromStyles.fromDate}>10:40</Text>
-                </View> 
-        </View>
+            <View style={chatFromStyles.from}>
+                    <View style={chatFromStyles.fromContainer}>
+                        <Image style={chatFromStyles.fromImage} source='https://randomuser.me/api/portraits/women/0.jpg'/>
+                        <Text style={chatFromStyles.fromMessage}>{props.data.message}</Text>
+                    </View>
+                    <View style={chatFromStyles.fromContainerText}>
+                        <Text style={chatFromStyles.fromUser}>From Alexa Rollins</Text>
+                        <Text style={chatFromStyles.fromDate}>10:40</Text>
+                    </View> 
+            </View>
     )
 }
 
