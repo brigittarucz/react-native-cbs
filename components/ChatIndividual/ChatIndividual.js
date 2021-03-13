@@ -1,56 +1,68 @@
 import React from 'react';
-import { View, FlatList, Text, Image, TextInput } from 'react-native';
+import { View, FlatList, Text, Image, TextInput, Button } from 'react-native';
 import { chatFromStyles, chatToStyles, chatStartStyles } from './styles';
-import { USERS } from '../../data/dummy-data';
+import { USERS, CHATMESSAGES } from '../../data/dummy-data';
+import { useDispatch, useSelector } from 'react-redux';
+import chatActions from '../../store/actions/ChatActions';
+import { useEffect, useState } from 'react';
+import ChatMessage  from '../../models/ChatMessage';
+
 const loggedInUserPrivate = 4;
 
 const ChatIndividual = (props) => {
     const {navigation, route} = props;
-    if(route.params != undefined) {
-        var messagesProps = route.params.item.chatMessages;
-        console.log(route.params.item.chatMessages)
-        // Todo: make it work for private users as well
-        // Todo: split users public and private and have a one on one
 
-        var messagesList = <FlatList
-            data={messagesProps}
-            renderItem={itemData => {
-                if (itemData.item.userFrom.id == loggedInUserPrivate) {
-                    return <ChatTo />
-                } else {
-                    return <ChatFrom />
-                }
-               
-            }}   /> 
+    const dispatch = useDispatch();
+    const [userInput, setUserInput] = useState('');
+    const [triggerRerender, setTriggerRerender] = useState(false);
+
+    useEffect(() => {
+        dispatch(chatActions.setMessages(
+            {messages: route.params != undefined ? 
+                route.params.item.chatMessages : 
+                []
+            })       
+    )}, [props])
+    
+    var chatMessages = useSelector(state => state.ChatReducer.messages);
+
+    const sendMessageHandler = () => {
+        var newMessage = new ChatMessage(chatMessages.length, 1, new Date(), userInput, USERS[4], USERS[3], true)
+        chatMessages.push(newMessage);
+        // Push new message to state
+        dispatch(chatActions.setMessages(
+            {messages: chatMessages}
+        ))
+        // Hackish way to trigger rerender of the list
+        setTriggerRerender(!triggerRerender);
     }
-    var messages = 0
-
-
-
-    // if(route.params != undefined) {
-    //     console.log(route.params.item.chatMessages[0])
-    //     messages = <FlatList 
-    //                     data={route.params.item.chatMessages}
-    //                     renderItem={itemData => (
-    //                         <View>
-    //                             <Text>{itemData.item.message}</Text>
-    //                         </View>
-    //                     )}
-    //                />
-    // }
-
+    
+    const textChangeHandler = (event) => {
+        setUserInput(event)
+    }
+    
+    const deleteMessageHandler = (event)
 
     return (
-        // <Text>{route.params.item.chatMessages[0].id}</Text>
-        // <View>
-        //     {messages}
-        // </View>
         <View style={{height: '100%', width: '100%'}}>
-            { messagesList }
-            
+            <FlatList
+                data={chatMessages}
+                extraData={triggerRerender}
+                renderItem={itemData => {
+                    console.log(itemData)
+                    if (itemData.item.userFrom.id == loggedInUserPrivate) {
+                        return <ChatTo />
+                    } else {
+                        return <ChatFrom />
+                    }
+                }}   
+                keyExtractor={item => item.id.toString()} /> 
             <View style={chatStartStyles.start}>
                 <Image style={chatStartStyles.startImage} source='https://randomuser.me/api/portraits/women/0.jpg' />
-                <TextInput style={chatStartStyles.startInput} placeholder="Write message"/>
+                <TextInput onChangeText={(event) => textChangeHandler(event)} style={chatStartStyles.startInput} placeholder="Write message"/>
+                <View style={{margin: 10}}>
+                    <Button onPress={() => sendMessageHandler()} title="Send"></Button>
+                </View>
             </View>
         </View>
     );
@@ -67,7 +79,7 @@ const ChatTo = (props) => {
 
 const ChatFrom = (props) => {
     return (
-        <View style={chatFromStyles.from}>
+        <View style={chatFromStyles.from} onPress={() => deleteMessageHandler()}>
                 <View style={chatFromStyles.fromContainer}>
                     <Image style={chatFromStyles.fromImage} source='https://randomuser.me/api/portraits/women/0.jpg'/>
                     <Text style={chatFromStyles.fromMessage}>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit.</Text>
