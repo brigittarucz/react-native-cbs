@@ -5,7 +5,7 @@ import { chatRoomStyles } from './styles';
 
 const ChatRoom = props => {
     // 86400 sec in day
-    console.log(differenceInSeconds(new Date(), props.item.lastMessageDate));
+    // console.log(differenceInSeconds(new Date(), props.item.lastMessageDate));
 
     return (
         <View style={chatRoomStyles.container}>

@@ -1,7 +1,7 @@
 import { SET_USER_SESSION, LOG_USER_OUT, LOG_USER_IN } from '../constants/ConstantsActions';
 
 const logUserIn = (user) => {
-    console.log("worked")
+    // console.log("worked")
     return {
         type: LOG_USER_IN,
         payload: user
