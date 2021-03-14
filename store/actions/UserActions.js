@@ -1,4 +1,4 @@
-import { SET_USER_SESSION, LOG_USER_OUT, LOG_USER_IN } from '../constants/ConstantsActions';
+import { SET_USER_SESSION, LOG_USER_OUT, LOG_USER_IN, SAVE_USER } from '../constants/ConstantsActions';
 
 const logUserIn = (user) => {
     // console.log("worked")
@@ -15,14 +15,23 @@ const setUserSession = (userSession) => {
     }
 }
 
+const saveUser = (userSession) => {
+    return {
+        type: SAVE_USER,
+        payload: userSession
+    }
+}
+
 const logUserOut = () => {
     return {
         type: LOG_USER_OUT
     }
 }
 
+
 export default {
     setUserSession,
     logUserOut,
-    logUserIn
+    logUserIn,
+    saveUser,
 }

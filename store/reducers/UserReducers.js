@@ -1,4 +1,4 @@
-import { SET_USER_SESSION, LOG_USER_OUT, LOG_USER_IN } from '../constants/ConstantsActions';
+import { SET_USER_SESSION, LOG_USER_OUT, LOG_USER_IN, SAVE_USER } from '../constants/ConstantsActions';
 
 // DO NOT set values in reducers, only return a 
 // new state object with ever changed values !!
@@ -23,6 +23,12 @@ const UserReducer = (state = {userSession: {}, isLoggedIn: false}, action) => {
             return {
                 ...state,
                 userSession: action.payload.user,
+                isLoggedIn: true
+            }
+        case SAVE_USER:
+            return {
+                ...state,
+                userSession: action.payload.userSession,
                 isLoggedIn: true
             }
         default:

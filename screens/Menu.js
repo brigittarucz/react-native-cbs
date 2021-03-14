@@ -1,13 +1,16 @@
 import React from 'React';
+import { useState } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
 import { useSelector } from 'react-redux';
 import Input from '../components/UI/Input';
+import { useDispatch } from 'react-redux';
+import userActions from '../store/actions/UserActions';
 
 const ProfileScreen = props => {
     const navigation = useNavigation();
-    const loggedInUser = useSelector(state => state.UserReducer.userSession);
+    const loggedInUser = props.loggedInUser;
 
     return (
         <View>
@@ -20,13 +23,28 @@ const ProfileScreen = props => {
 }
 
 const EditProfileScreen = props => {
-    const loggedInUser = useSelector(state => state.UserReducer.userSession);
+    const loggedInUser = props.loggedInUser;
+
+    const [changeName, setChangeName] = useState(loggedInUser.name); // lift up
+    const [nameValid, setNameValid] = useState(false); // lift up - pass through props instead
+    const [errorMsg, setErrorMsg] = useState('');
+    const dispatch = useDispatch();
+
+    const handleNewInput = (enteredText) => {
+        // setTouched(true);
+        console.log(enteredText)
+        enteredText === '' ? setNameValid(false) : setNameValid(true);
+        setChangeName(enteredText);
+    };
 
     const handleSave = () => {
         if (nameValid) {
             // dispatch a redux action to save the new user obj.
+            loggedInUser.name = changeName;
+            dispatch(userActions.saveUser({userSession: loggedInUser }))
         } else {
             // Display an alert saying: Fix the errors.
+            setErrorMsg('Invalid input');
         }
     };
 
@@ -35,8 +53,10 @@ const EditProfileScreen = props => {
             <Text>Edit Profile Screen</Text>
             <Input style={{margin:10, borderColor: 'black', borderWidth: 2}} 
                 label="Username" 
-                value={loggedInUser.name} 
-                error="Please fill out your name"/>
+                username={changeName} 
+                handleNewInput={handleNewInput}
+                nameValid={nameValid}
+                error={errorMsg}/>
             <Button title="Save" onPress={handleSave} />
         </View> 
     )
@@ -45,13 +65,14 @@ const EditProfileScreen = props => {
 const Menu = props => {
     const Stack = createStackNavigator();
     const navigation = useNavigation();
+    const loggedInUser = useSelector(state => state.UserReducer.userSession);
 
     return (
         <Stack.Navigator initialRouteName="ProfileScreen">
             <Stack.Screen name="Profile" 
-                        component={ProfileScreen} />
+                        component={() => <ProfileScreen loggedInUser={loggedInUser}/>} />
             <Stack.Screen name="Edit Profile"
-                        component={EditProfileScreen} />
+                        component={() => <EditProfileScreen loggedInUser={loggedInUser} />} />
         </Stack.Navigator>
     );
 }
