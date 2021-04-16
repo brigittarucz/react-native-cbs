@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import Input from '../components/UI/Input';
 import { useDispatch } from 'react-redux';
 import userActions from '../store/actions/UserActions';
-import ChangePassword from './ChangePassword';
+import ChangePassword from './Authentication/ChangePassword/ChangePassword';
 
 const ProfileScreen = props => {
     const navigation = useNavigation();

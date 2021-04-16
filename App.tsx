@@ -6,7 +6,7 @@ import { StyleSheet } from "react-native";
 import store from './store/StoreConfiguration';
 import { Provider } from 'react-redux';
 
-import BottomNav from './navigation/BottomNav';
+import MainTabNavigator from './navigation/MainTabNavigator';
 
 export default function App() {
 
@@ -14,7 +14,7 @@ export default function App() {
 
   return (
     <Provider store={store}>
-      <BottomNav />
+      <MainTabNavigator />
     </Provider>
   );
 }
