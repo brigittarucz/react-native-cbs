@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import Input from '../components/UI/Input';
 import { useDispatch } from 'react-redux';
 import userActions from '../store/actions/UserActions';
+import ChangePassword from './ChangePassword';
 
 const ProfileScreen = props => {
     const navigation = useNavigation();
@@ -18,6 +19,7 @@ const ProfileScreen = props => {
             <Text>{loggedInUser.name}</Text>
             <Text>{loggedInUser.title}</Text>
             <Button title="Edit Profile" onPress={() => navigation.navigate("Edit Profile")}/>
+            <Button title="Change Password" onPress={() => navigation.navigate("ChangePassword")}/>
         </View>
     )
 }
@@ -68,11 +70,13 @@ const Menu = props => {
     const loggedInUser = useSelector(state => state.UserReducer.userSession);
 
     return (
-        <Stack.Navigator initialRouteName="ProfileScreen">
+        <Stack.Navigator initialRouteName="Profile">
             <Stack.Screen name="Profile" 
                         component={() => <ProfileScreen loggedInUser={loggedInUser}/>} />
             <Stack.Screen name="Edit Profile"
                         component={() => <EditProfileScreen loggedInUser={loggedInUser} />} />
+            <Stack.Screen name="ChangePassword" 
+                        component={() => <ChangePassword loggedInUser={loggedInUser}/>} />
         </Stack.Navigator>
     );
 }

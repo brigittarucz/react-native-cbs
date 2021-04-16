@@ -11,15 +11,21 @@ import { CHATROOMS, USERS } from './../data/dummy-data';
 import ChatRoom from '../components/ChatRoom/ChatRoom';
 import ChatIndividual from '../components/ChatIndividual/ChatIndividual';
 
+import Signup from './Signup'; 
+
 import { useSelector } from 'react-redux';
 import SessionReducer from '../store/reducers/UserReducers';
 
+import NewChatroom from '../screens/NewChatroom';
+
 // TODO: to be removed and moved in the right component - testing purposes
 import Login from './Login';
+import ChangePassword from './ChangePassword';
 
 const ChatPublic = props => {
     var _isMounted = false;
     const currentState = useSelector(state => state);
+    console.log(currentState);
     const [ currentChatrooms, setCurrentChatrooms] = useState([])
     const navigation = useNavigation();
 
@@ -118,9 +124,11 @@ const StackNav = () => {
     const navigation = useNavigation();
 
     return (
-        <Stack.Navigator initialRouteName="Login">
-            <Stack.Screen name="Login" 
-                        component={Login} />
+        <Stack.Navigator initialRouteName="NewChatroom">
+            <Stack.Screen name="NewChatroom" 
+                        component={NewChatroom} />
+            <Stack.Screen name="ChangePassword" 
+                        component={ChangePassword} />
             <Stack.Screen name="Chat" 
                         component={TopTabs}
                         options={{
