@@ -14,18 +14,25 @@ const Signup = props => {
    const [emailValid, setEmailValid] = useState(false);
    const [password, setPassword] = useState('');
    const [passwordValid, setPasswordValid] = useState(false);
+   const [name, setName] = useState('');
+   const [nameValid, setNameValid] = useState(false);
 
    const Stack = createStackNavigator();
    const navigation = useNavigation();
 
    const handleSignup = () => {
     //   dispatch(userActions.signUserUp({email, password}));
-      dispatch(userActions.signUserUp(email, password));
-      navigation.navigate('Chat');
+      dispatch(userActions.signUserUp(name, email, password));
    };
 
    return (
       <View style={styles.container}>
+         <Input label="Name"
+            error="Please fill out your name"
+            text={name} nameValid={nameValid}
+            onValid={valid => setNameValid(valid)}
+            setContent={content => setName(content)}/>
+
          <Input label="Email"
             error="Please fill out your email"
             text={email} nameValid={emailValid}

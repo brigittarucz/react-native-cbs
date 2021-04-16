@@ -9,8 +9,6 @@ import { useState } from 'react';
 const Login = props => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
-    // var isLoading = useSelector(state => state.UserReducer);
-    // dispatch(userActions.isLoading(false));
     const [isLoading, setIsLoading] = useState(false);
 
     const loginHandler = () => {
@@ -18,15 +16,9 @@ const Login = props => {
         setTimeout(() => {
             dispatch(userActions.logUserIn({user: USERS[3]}));
             setIsLoading(false);
-            navigation.navigate('Chat');
+            // navigation.navigate('Chat');
         }, 1000)
     }
-
-    // if(!isLoading) {
-    //     var activityIndicator = ( <ActivityIndicator size="large" color="#0000ff"  /> );
-    // } else {
-    //     var activityIndicator = <Text></Text>;
-    // }
 
     return (
         <View>

@@ -11,13 +11,14 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import NewChatroom from '../screens/Chat/NewChatroom/NewChatroom';
 import ChatTabNavigator from './ChatTabNavigator';
 import ChangePassword from '../screens/Profile/ChangePassword/ChangePassword';
+import ChatIndividual from '../screens/Chat/ChatIndividual/ChatIndividual';
 
 export default function ChatStackNavigator() {
     const Stack = createStackNavigator();
     const navigation = useNavigation();
 
     return (
-        <Stack.Navigator initialRouteName="ChangePassword">
+        <Stack.Navigator initialRouteName="ChatTabNavigator">
             <Stack.Screen name="NewChatroom" 
                         component={NewChatroom} />
             <Stack.Screen name="ChangePassword" 
@@ -50,7 +51,7 @@ export default function ChatStackNavigator() {
                             )
                         }} 
                         /> 
-            {/* <Stack.Screen name="Chat Conversation"
+            <Stack.Screen name="Chat Individual"
                         component={ChatIndividual}
                         options={{
                             headerTitle: "Chat",
@@ -85,7 +86,7 @@ export default function ChatStackNavigator() {
                             cardStyle: {
                                 backgroundColor: 'white',
                                 opacity: 1
-                            }}}/> */}
+                            }}}/>
         </Stack.Navigator>
    )                         
 }

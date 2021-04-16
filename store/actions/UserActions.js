@@ -5,13 +5,6 @@ import { SET_USER_SESSION,
          SIGN_USER_UP, 
          CHANGE_PASSWORD } from '../constants/ConstantsActions';
 
-// const isLoading = (isLoading) => {
-//     return {
-//         type: IS_LOADING,
-//         payload: isLoading
-//     }
-// }
-
 const logUserIn = (user) => {
     // console.log("worked")
     // email: brigitta1@yahoo.com
@@ -25,8 +18,8 @@ const logUserIn = (user) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email: 'brigitta1@yahoo.com',
-                    password: 'password123',
+                    email: 'brig@yahoo.com',
+                    password: 'mypassword123',
                     // password: user.user.password,
                     returnSecureToken: true
                 })
@@ -54,7 +47,7 @@ const changePassword = (userSession) => {
     }
 }
 
-const signUserUp = (email, password) => {
+const signUserUp = (name, email, password) => {
     // return {
     //     type: SIGN_USER_UP,
     //     payload: userSession
@@ -72,6 +65,7 @@ const signUserUp = (email, password) => {
             // Should be able to send a request to Firebase to save a new user
             // and save the returned token and user info in the Redux store
             body: JSON.stringify({ 
+                name: name,
                 email: email,
                 password: password,
                 returnSecureToken: true

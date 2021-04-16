@@ -50,10 +50,9 @@ const UserReducer = (state: UserState = initialState, action: Action) => {
                 isLoggedIn: true
             }
         case SIGN_USER_UP: {
-            // console.log(action.payload)
             return {
                 ...state,
-                userSession: new User(action.payload.localId, '', action.payload.email, action.payload.password, '', '', '', ''),
+                userSession: new User(action.payload.localId, action.payload.name , action.payload.email, action.payload.password, '', '', '', ''),
                 isLoggedIn: true,
                 idToken: action.payload.idToken
             }

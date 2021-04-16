@@ -10,29 +10,28 @@ import { CHATROOMS, USERS } from './../data/dummy-data';
 import ChatPrivate from '../screens/Chat/ChatPrivate/ChatPrivate';
 import ChatPublic from '../screens/Chat/ChatPublic/ChatPublic';
 
+import { useSelector } from "react-redux";
+
 export default function ChatTabNavigator() {
     const Tab = createMaterialTopTabNavigator();
 
-    const loggedInUser = USERS[3];
+    const loggedInUser = useSelector((state) => state.UserReducer.userSession);
     var tabScreens = null;
-
-    // useEffect(() => {
-    //     console.log('[TopTabs] mounted')
-    // }, [])
-
+ 
     // Filter private and public chats
     const publicChatRooms = CHATROOMS.filter(chatroom => chatroom.isPublicChat)
     const privateChatRooms = CHATROOMS.filter(chatroom => !chatroom.isPublicChat)
 
-    if(loggedInUser.additionalPublicIdentities.length) {
-        tabScreens = loggedInUser.additionalPublicIdentities.map(publicUserId => (
-            <Tab.Screen 
-                name={USERS[publicUserId.id-1].name} 
-                publicUser={USERS[publicUserId.id-1]}
-                children={() => <ChatPrivate chatrooms={privateChatRooms}/>} 
-                />
-        ))
-    }
+    // if(loggedInUser.additionalPublicIdentities.length) {
+    //     tabScreens = loggedInUser.additionalPublicIdentities.map(publicUserId => (
+    //         <Tab.Screen 
+    //             name="User"
+    //             name={USERS[3].name} 
+    //             publicUser={USERS[3]}
+    //             children={() => <ChatPrivate chatrooms={privateChatRooms}/>} 
+    //             />
+    //     ))
+    // }
 
     return (
         <Tab.Navigator
@@ -48,7 +47,7 @@ export default function ChatTabNavigator() {
                 }
                 
             }}> 
-             <Tab.Screen name="Chat Individual"
+             {/* <Tab.Screen name="Chat Individual"
                         component={ChatIndividual}
                         options={{
                             headerTitle: "Chat",
@@ -83,12 +82,15 @@ export default function ChatTabNavigator() {
                             cardStyle: {
                                 backgroundColor: 'white',
                                 opacity: 1
-                            }}}/>
+                            }}}/> */}
             <Tab.Screen 
-                name={loggedInUser.name} 
+                name="CBS Surf" 
                 children={() => <ChatPublic chatrooms={publicChatRooms}/>}
                 />           
-            { tabScreens }       
+            <Tab.Screen 
+                name={loggedInUser.email} 
+                children={() => <ChatPrivate chatrooms={privateChatRooms}/>} 
+                />      
         </Tab.Navigator>
     )
 }
