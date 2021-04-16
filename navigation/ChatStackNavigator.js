@@ -87,6 +87,7 @@ export default function ChatStackNavigator() {
                                 backgroundColor: 'white',
                                 opacity: 1
                             }}}/>
+            
         </Stack.Navigator>
    )                         
 }

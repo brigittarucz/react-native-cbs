@@ -8,11 +8,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import chatActions from '../../../store/actions/ChatActions';
 import { useEffect, useState } from 'react';
 import ChatMessage  from '../../../models/ChatMessage';
-
+import getChatRooms from '../utils';
 const loggedInUserPrivate = 4;
 
 const ChatIndividual = (props) => {
     const {navigation, route} = props;
+    // setCurrentChatrooms(getChatRooms(props.chatrooms, loggedInUserPublic, loggedInUserPrivate));
+    console.log(props);
 
     const dispatch = useDispatch();
     const [userInput, setUserInput] = useState('');

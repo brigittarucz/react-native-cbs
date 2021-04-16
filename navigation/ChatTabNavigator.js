@@ -90,7 +90,8 @@ export default function ChatTabNavigator() {
             <Tab.Screen 
                 name={loggedInUser.email} 
                 children={() => <ChatPrivate chatrooms={privateChatRooms}/>} 
-                />      
+                />  
+                {/* TODO: state is not being kept between navigators. Create stack screen inside both ChatPulbic and ChatPrivate for ChatIndividual */}
         </Tab.Navigator>
     )
 }

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 
+import React, { useEffect, useState } from 'react';
 import 'react-native-gesture-handler';
 import { useNavigation } from '@react-navigation/native';
 import { View, FlatList, TouchableOpacity } from 'react-native';
@@ -12,15 +12,9 @@ import getChatRooms from '../utils';
 
 const ChatPrivate = props => {
     var _isMounted = false;
-    const currentState = useSelector(state => state);
-    // console.log(currentState);
     const [ currentChatrooms, setCurrentChatrooms] = useState([])
-
     const navigation = useNavigation();
-
     const loggedInUserPrivate = USERS[3];
-    // Only one additional public identity for now
-    // TODO: pass through props loggedInUserPrivate & public
     const loggedInUserPublic = USERS[loggedInUserPrivate.additionalPublicIdentities[0].id-1];
     var tabScreens = null;
  
