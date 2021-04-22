@@ -1,14 +1,18 @@
 // Massive bug fixer
 import 'react-native-gesture-handler';
 import React from 'react';
-import { View, FlatList, Text, Image, TextInput, Button, TouchableOpacity } from 'react-native';
-import { chatFromStyles, chatToStyles, chatStartStyles } from './styles';
-import { USERS, CHATMESSAGES } from '../../../data/dummy-data';
+import { View, FlatList, Image, TextInput, Button, TouchableOpacity } from 'react-native';
+import { chatStartStyles } from './styles';
+import { USERS } from '../../../data/dummy-data';
 import { useDispatch, useSelector } from 'react-redux';
 import chatActions from '../../../store/actions/ChatActions';
 import { useEffect, useState } from 'react';
 import ChatMessage  from '../../../models/ChatMessage';
 import getChatRooms from '../utils';
+
+import ChatTo from './ChatTo/ChatTo';
+import ChatFrom from './ChatFrom/ChatFrom';
+
 const loggedInUserPrivate = 4;
 
 const ChatIndividual = (props) => {
@@ -79,30 +83,6 @@ const ChatIndividual = (props) => {
             </View>
         </View>
     );
-}
-
-const ChatTo = (props) => {
-    return (
-        <View style={chatToStyles.to}>
-            <Text style={chatToStyles.toMessage} >{props.data.message}</Text>
-            <Text style={chatToStyles.toDate} >10:44</Text>
-        </View>
-    )
-}
-
-const ChatFrom = (props) => {
-    return (
-            <View style={chatFromStyles.from}>
-                    <View style={chatFromStyles.fromContainer}>
-                        <Image style={chatFromStyles.fromImage} source='https://randomuser.me/api/portraits/women/0.jpg'/>
-                        <Text style={chatFromStyles.fromMessage}>{props.data.message}</Text>
-                    </View>
-                    <View style={chatFromStyles.fromContainerText}>
-                        <Text style={chatFromStyles.fromUser}>From Alexa Rollins</Text>
-                        <Text style={chatFromStyles.fromDate}>10:40</Text>
-                    </View> 
-            </View>
-    )
 }
 
 export default ChatIndividual;
