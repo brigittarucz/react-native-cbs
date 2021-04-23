@@ -36,7 +36,7 @@ const Input = (props: Props) => {
    return (
       <View>
           <Text>{props.label}</Text>
-          <TextInput value={props.username} 
+          <TextInput value={props.value} 
             style={styles.input}
             onChangeText={props.handleNewInput ? props.handleNewInput : handleNewInput}
             onBlur={() => setTouched(true)}></TextInput>

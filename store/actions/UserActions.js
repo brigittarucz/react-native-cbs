@@ -6,7 +6,6 @@ import { SET_USER_SESSION,
          CHANGE_PASSWORD } from '../constants/ConstantsActions';
 
 import PrivateUser from '../../models/PrivateUser';
-import UserReducer from '../reducers/UserReducers';
 
 const logUserIn = (email, password) => {
 
@@ -151,6 +150,7 @@ const setUserSession = (userSession) => {
 }
 
 const saveUser = (userSession) => {
+    console.log(userSession)
     return {
         type: SAVE_USER,
         payload: userSession

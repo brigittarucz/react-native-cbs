@@ -17,8 +17,8 @@ const Profile = props => {
                     uri: loggedInUser.image,
             }} />
             <Text>{loggedInUser.name}</Text>
+            <Text>{loggedInUser.email}</Text>
             <Text>{loggedInUser.title}</Text>
-            <Text>MSc in Business Administration and E-business</Text>
             <Button title="Edit Profile" onPress={() => navigation.navigate("Edit Profile")}/>
 
 
