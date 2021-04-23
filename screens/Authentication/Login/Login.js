@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, ActivityIndicator } from 'react-native'
 import { useNavigation } from '@react-navigation/native';
 import { useDispatch, useSelector } from 'react-redux';
 import userActions from '../../../store/actions/UserActions';
+import chatActions from '../../../store/actions/ChatActions';
 import { USERS } from '../../../data/dummy-data';
 import { useState } from 'react';
 import Input from '../../../components/UI/Input';
@@ -26,8 +27,14 @@ const Login = props => {
         if(email.length >= 10 && password.length >= 7) {
             setTimeout(() => {
                 dispatch(userActions.logUserIn(email, password))
-                    .catch(res => {
-                        console.log(res);
+                    .then(res => {
+                        dispatch(chatActions.setChatRooms(res))
+                            .catch(error => {
+                                console.log(error)
+                            })
+                    })
+                    .catch(error => {
+                        console.log(error);
                         setDisplayStatus(<Text>Invalid credentials!</Text>)
                     })
                     setIsLoading(false);

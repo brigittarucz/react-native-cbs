@@ -63,41 +63,10 @@ const logUserIn = (email, password) => {
                                                    users[key].chatNotification,
                                                    users[key].additionalPublicIdentity)
                         
-                        const response = await fetch(
-                            'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/chatrooms.json?auth=' + token, {
-                                method: 'GET',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                }
-                            }
-                        )    
+                        dispatch({type: LOG_USER_IN, payload: {user: user, idToken: data.idToken } });
                         
-                        var chatrooms = await response.json();
-
-                        if(!response.ok) {
-                            throw new Error("Could not retrieve chatrooms")
-                        } else {
-                            const response = await fetch(
-                                'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/chatrooms.json?auth=' + token, {
-                                    method: 'GET',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    }
-                                }
-                            )
-                            
-                            var messages = await response.json();
-
-                            if(!response.ok) {
-                                throw new Error("Could not retrieve messages")
-                            } else {
-                                console.log(chatrooms);
-                                console.log(messages);
-    
-                                dispatch({type: LOG_USER_IN, payload: {user: user, idToken: data.idToken } });
-                            }
-                        }
-
+                        // Because of redux thunk we can return:
+                        return token;
                     }
                 }
                 

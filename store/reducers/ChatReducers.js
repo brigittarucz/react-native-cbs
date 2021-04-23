@@ -1,4 +1,4 @@
-import { SET_MESSAGES, CREATE_CHATROOM } from '../constants/ConstantsActions';
+import { SET_MESSAGES, CREATE_CHATROOM, SET_CHATROOMS } from '../constants/ConstantsActions';
 
 const ChatReducer = (state = {messages: {}}, action) => {
     switch(action.type) {
@@ -10,6 +10,12 @@ const ChatReducer = (state = {messages: {}}, action) => {
             return {
                 
             }
+        case SET_CHATROOMS: {
+            console.log(action.payload);
+            return {
+
+            }
+        }
         default:
             return state
     }
