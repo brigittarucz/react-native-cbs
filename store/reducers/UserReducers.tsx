@@ -1,10 +1,12 @@
-import { SET_USER_SESSION, LOG_USER_OUT, LOG_USER_IN, SAVE_USER, SIGN_USER_UP, CHANGE_PASSWORD} from '../constants/ConstantsActions';
+import { SET_USER_SESSION, LOG_USER_OUT, LOG_USER_IN, SAVE_USER, SIGN_USER_UP, CHANGE_PASSWORD } from '../constants/ConstantsActions';
 import User from '../../models/PrivateUser';
 
 // Class vs interfaces - interfaces cannot be instantiated
 export interface UserState {
     userSession: User | {} ,
-    isLoggedIn: boolean
+    isLoggedIn: boolean,
+    error: boolean,
+    idToken: string
 }
 
 export interface Action {
@@ -14,7 +16,9 @@ export interface Action {
 
 const initialState: UserState = {
     userSession: {},
-    isLoggedIn: false
+    isLoggedIn: false,
+    error: false,
+    idToken: ''
 }
 
 // DO NOT set values in reducers, only return a 
@@ -36,13 +40,14 @@ const UserReducer = (state: UserState = initialState, action: Action) => {
                 userSession: {},
                 isLoggedIn: false
             }
-        case LOG_USER_IN:
+        case LOG_USER_IN: {
             return {
                 ...state,
-                userSession: new User(action.payload.localId, '', action.payload.email, action.payload.password, '', '', '', ''),
+                userSession: action.payload.user,
                 isLoggedIn: true,
                 idToken: action.payload.idToken
             }
+        }
         case SAVE_USER:
             return {
                 ...state,

@@ -5,11 +5,14 @@ import { SET_USER_SESSION,
          SIGN_USER_UP, 
          CHANGE_PASSWORD } from '../constants/ConstantsActions';
 
-const logUserIn = (user) => {
-    // console.log("worked")
-    // email: brigitta1@yahoo.com
-    // password: password123
-    console.log(user);
+import PrivateUser from '../../models/PrivateUser';
+import UserReducer from '../reducers/UserReducers';
+
+const logUserIn = (email, password) => {
+
+    // Email: brigitta1@yahoo.com
+    // Password: password123
+
     return async dispatch => {
         const response = await fetch(
             'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDdwdVRkCY3OH-us9FgECuq1mKTCdZSLuw', {
@@ -18,22 +21,53 @@ const logUserIn = (user) => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    email: 'brig@yahoo.com',
-                    password: 'mypassword123',
-                    // password: user.user.password,
+                    email:  email,
+                    password: password,
                     returnSecureToken: true
                 })
             }
         )
 
         const data = await response.json(); // json to javascript
-        console.log(data);
+        
         if (!response.ok) {
-            //There was a problem..
+            console.log(data);
+            throw new Error("Could not log in");
         } else {
-            dispatch({type: LOG_USER_IN, payload: data });
+            var token = data.idToken;
+
+            const response = await fetch(
+                'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=' + token, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                }
+            )
+
+            var users = await response.json();
+            var usersKeys = Object.keys(users)
+
+            for (var key of usersKeys) {
+                if(users[key].email === email) {
+                    var user = new PrivateUser(users[key].id, 
+                                               users[key].name,
+                                               users[key].email,
+                                               users[key].password,
+                                               users[key].image,
+                                               users[key].title,
+                                               users[key].chatNotification,
+                                               users[key].additionalPublicIdentity)
+                        
+                    dispatch({type: LOG_USER_IN, payload: {user: user, idToken: data.idToken } });
+                }
+            }
+            
+            // TODO: Handle case no match found
+
         }
     }
+
     // return {
     //     type: LOG_USER_IN,
     //     payload: user
@@ -48,15 +82,9 @@ const changePassword = (userSession) => {
 }
 
 const signUserUp = (name, email, password) => {
-    // return {
-    //     type: SIGN_USER_UP,
-    //     payload: userSession
-    // }
-    // Authentication > get started
-    // Project overview > project settings > web API key
+    // Getting started: authentication > get started > proj overview > proj settings > web API key
     return async dispatch => {
         const response = await fetch(
-            // 'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyDdwdVRkCY3OH-us9FgECuq1mKTCdZSLuw', {
             'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDdwdVRkCY3OH-us9FgECuq1mKTCdZSLuw', {
             method: 'POST',
             headers: {
@@ -75,12 +103,44 @@ const signUserUp = (name, email, password) => {
         const data = await response.json(); // json to javascript
         console.log(data);
         if (!response.ok) {
-            //There was a problem..
+            throw new Error('Could not sign up');
         } else {
-            dispatch({type: SIGN_USER_UP, payload: data });
-            console.log(email);
+            var token = data.idToken;
+            var id = data.localId;
+
+            // Save other user data in DB
+
+            const response = await fetch(
+                'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=' + token, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        id: id,
+                        name: name,
+                        email: email,
+                        image: 'https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3.png',
+                        title: '',
+                        chatNotification: false,
+                        additionalPublicIdentity: 0
+                    })
+                }
+            )
+
+            if (!response.ok) {
+                throw new Error('Could not save additional user data')
+            } else {
+                dispatch({type: SIGN_USER_UP, payload: data });
+            }
+
         }
     };
+
+    // return {
+    //     type: SIGN_USER_UP,
+    //     payload: userSession
+    // }
 }
 
 const setUserSession = (userSession) => {

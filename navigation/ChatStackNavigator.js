@@ -13,6 +13,8 @@ import ChatTabNavigator from './ChatTabNavigator';
 import ChangePassword from '../screens/Profile/ChangePassword/ChangePassword';
 import ChatIndividual from '../screens/Chat/ChatIndividual/ChatIndividual';
 
+import ChatMessage from '../screens/Chat/ChatMessage/ChatMessage';
+
 export default function ChatStackNavigator() {
     const Stack = createStackNavigator();
     const navigation = useNavigation();
@@ -23,6 +25,8 @@ export default function ChatStackNavigator() {
                         component={NewChatroom} />
             <Stack.Screen name="ChangePassword" 
                         component={ChangePassword} />
+            <Stack.Screen name="ChatMessage" 
+                        component={ChatMessage} />
             <Stack.Screen name="ChatTabNavigator" 
                         component={ChatTabNavigator}
                         options={{
@@ -87,7 +91,6 @@ export default function ChatStackNavigator() {
                                 backgroundColor: 'white',
                                 opacity: 1
                             }}}/>
-            
         </Stack.Navigator>
    )                         
 }

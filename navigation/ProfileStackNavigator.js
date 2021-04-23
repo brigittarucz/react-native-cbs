@@ -12,6 +12,8 @@ export default function ProfileStackNavigator() {
     const Stack = createStackNavigator();
     const loggedInUser = useSelector(state => state.UserReducer.userSession);
 
+    console.log(loggedInUser);
+
     return (
         <Stack.Navigator initialRouteName="Profile">
             <Stack.Screen name="Profile" 

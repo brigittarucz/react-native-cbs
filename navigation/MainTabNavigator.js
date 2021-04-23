@@ -36,19 +36,6 @@ export default function MainTabNavigator() {
         var tabs = (
             <>
                 <Tab.Screen
-                    name="Chat"
-                    component={ChatStackNavigator}
-                    options={() => ({
-                        tabBarIcon: () => (
-                            <MaterialCommunityIcons
-                                name="chat"
-                                color="#5050A5"
-                                size="32px"
-                            />
-                        ),
-                    })}
-                />
-                <Tab.Screen
                     name="Home"
                     component={Home}
                     options={() => ({
@@ -70,6 +57,19 @@ export default function MainTabNavigator() {
                                 name="magnify"
                                 color="#5050A5"
                                 size="28px"
+                            />
+                        ),
+                    })}
+                />
+                <Tab.Screen
+                    name="Chat"
+                    component={ChatStackNavigator}
+                    options={() => ({
+                        tabBarIcon: () => (
+                            <MaterialCommunityIcons
+                                name="chat"
+                                color="#5050A5"
+                                size="32px"
                             />
                         ),
                     })}

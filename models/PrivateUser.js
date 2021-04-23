@@ -1,5 +1,5 @@
 class PrivateUser {
-    constructor(id, name, email, password, image, title, chatNotification, additionalPublicIdentities) {
+    constructor(id, name, email, password, image, title, chatNotification, additionalPublicIdentity) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -7,7 +7,8 @@ class PrivateUser {
         this.image = image;
         this.title = title;
         this.chatNotification = chatNotification;
-        this.additionalPublicIdentities = additionalPublicIdentities;
+        // 0 / 1 / 2 / 3
+        this.additionalPublicIdentity = additionalPublicIdentity;
     }
 }
 
