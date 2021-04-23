@@ -44,13 +44,13 @@ const Login = props => {
     return (
         <View style={styles.container}>
             <Input label="Email"
-            error="Please fill out your email"
+            error="Please fill out your email" value={email}
             text={email} nameValid={emailValid}
             onValid={valid => setEmailValid(valid)}
             setContent={content => setEmail(content)}/>
 
             <Input label="Password"
-            error="Please fill out your password"
+            error="Please fill out your password" value={password}
             text={password} nameValid={passwordValid}
             onValid={valid => setPasswordValid(valid)}
             setContent={content => setPassword(content)}/>

@@ -35,6 +35,8 @@ const logUserIn = (email, password) => {
         } else {
             var token = data.idToken;
 
+            // Get user detailed data
+
             const response = await fetch(
                 'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=' + token, {
                     method: 'GET',
@@ -47,22 +49,61 @@ const logUserIn = (email, password) => {
             var users = await response.json();
             var usersKeys = Object.keys(users)
 
-            for (var key of usersKeys) {
-                if(users[key].email === email) {
-                    var user = new PrivateUser(key, 
-                                               users[key].name,
-                                               users[key].email,
-                                               users[key].password,
-                                               users[key].image,
-                                               users[key].title,
-                                               users[key].chatNotification,
-                                               users[key].additionalPublicIdentity)
+            if(!response.ok) {
+                throw new Error("Could not retrieve user details");
+            } else {
+                for (var key of usersKeys) {
+                    if(users[key].email === email) {
+                        var user = new PrivateUser(key, 
+                                                   users[key].name,
+                                                   users[key].email,
+                                                   users[key].password,
+                                                   users[key].image,
+                                                   users[key].title,
+                                                   users[key].chatNotification,
+                                                   users[key].additionalPublicIdentity)
                         
-                    dispatch({type: LOG_USER_IN, payload: {user: user, idToken: data.idToken } });
+                        const response = await fetch(
+                            'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/chatrooms.json?auth=' + token, {
+                                method: 'GET',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                }
+                            }
+                        )    
+                        
+                        var chatrooms = await response.json();
+
+                        if(!response.ok) {
+                            throw new Error("Could not retrieve chatrooms")
+                        } else {
+                            const response = await fetch(
+                                'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/chatrooms.json?auth=' + token, {
+                                    method: 'GET',
+                                    headers: {
+                                        'Content-Type': 'application/json'
+                                    }
+                                }
+                            )
+                            
+                            var messages = await response.json();
+
+                            if(!response.ok) {
+                                throw new Error("Could not retrieve messages")
+                            } else {
+                                console.log(chatrooms);
+                                console.log(messages);
+    
+                                dispatch({type: LOG_USER_IN, payload: {user: user, idToken: data.idToken } });
+                            }
+                        }
+
+                    }
                 }
+                
+                // TODO: Handle case no match found
             }
             
-            // TODO: Handle case no match found
 
         }
     }

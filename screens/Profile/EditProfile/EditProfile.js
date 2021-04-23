@@ -2,13 +2,19 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { View, Text, Button, Image } from 'react-native';
 
+import { useNavigation } from '@react-navigation/native';
+
+
 import Input from '../../../components/UI/Input';
 import userActions from '../../../store/actions/UserActions';
+
 
 const EditProfile = props => {
     const loggedInUser = props.loggedInUser;
 
     const idToken = useSelector((state) => state.UserReducer.idToken);
+
+    const navigation = useNavigation();
 
     const [name, setName] = useState(loggedInUser.name);
     const [nameValid, setNameValid] = useState(false);
@@ -31,6 +37,11 @@ const EditProfile = props => {
             loggedInUser.name = name;
             loggedInUser.title = studyProgramme
             dispatch(userActions.saveUser({userSession: loggedInUser, auth: idToken }))
+                .then(() => {
+                    navigation.navigate("Profile");
+                }).catch(error => {
+                    console.log(error);
+                })
         } else {
             setErrorMsg("No changes! Be sure to bring some!")
         }
