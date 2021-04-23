@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import Profile from '../screens/Profile/Profile';
 import EditProfile from '../screens/Profile/EditProfile/EditProfile';
-import ChangePassword from '../screens/Profile/ChangePassword/ChangePassword';
+// import ChangePassword from '../screens/Profile/ChangePassword/ChangePassword';
 
 
 export default function ProfileStackNavigator() {
@@ -20,8 +20,8 @@ export default function ProfileStackNavigator() {
                         component={() => <Profile loggedInUser={loggedInUser}/>} />
             <Stack.Screen name="Edit Profile"
                         component={() => <EditProfile loggedInUser={loggedInUser} />} />
-            <Stack.Screen name="ChangePassword" 
-                        component={() => <ChangePassword loggedInUser={loggedInUser}/>} />
+            {/* <Stack.Screen name="ChangePassword" 
+                        component={() => <ChangePassword loggedInUser={loggedInUser}/>} /> */}
         </Stack.Navigator>
     );
 }

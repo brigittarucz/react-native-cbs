@@ -10,7 +10,7 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 
 import NewChatroom from '../screens/Chat/NewChatroom/NewChatroom';
 import ChatTabNavigator from './ChatTabNavigator';
-import ChangePassword from '../screens/Profile/ChangePassword/ChangePassword';
+// import ChangePassword from '../screens/Profile/ChangePassword/ChangePassword';
 import ChatIndividual from '../screens/Chat/ChatIndividual/ChatIndividual';
 
 import ChatMessage from '../screens/Chat/ChatMessage/ChatMessage';
@@ -23,8 +23,8 @@ export default function ChatStackNavigator() {
         <Stack.Navigator initialRouteName="ChatTabNavigator">
             <Stack.Screen name="NewChatroom" 
                         component={NewChatroom} />
-            <Stack.Screen name="ChangePassword" 
-                        component={ChangePassword} />
+            {/* <Stack.Screen name="ChangePassword" 
+                        component={ChangePassword} /> */}
             <Stack.Screen name="ChatMessage" 
                         component={ChatMessage} />
             <Stack.Screen name="ChatTabNavigator" 
