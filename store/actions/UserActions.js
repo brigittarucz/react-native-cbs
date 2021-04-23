@@ -49,7 +49,7 @@ const logUserIn = (email, password) => {
 
             for (var key of usersKeys) {
                 if(users[key].email === email) {
-                    var user = new PrivateUser(users[key].id, 
+                    var user = new PrivateUser(key, 
                                                users[key].name,
                                                users[key].email,
                                                users[key].password,
@@ -151,10 +151,33 @@ const setUserSession = (userSession) => {
 
 const saveUser = (userSession) => {
     console.log(userSession)
-    return {
-        type: SAVE_USER,
-        payload: userSession
+
+    return async dispatch => {
+        const response = await fetch(
+            'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/users/' + userSession.userSession.id + '.json?auth=' + userSession.auth, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ 
+                name: userSession.userSession.name,
+                title: userSession.userSession.title
+            })
+        });
+
+        const data = await response.json(); 
+
+        if (!response.ok) {
+            throw new Error('Could not patch user');
+        } else {
+            dispatch({type: SAVE_USER, payload: userSession });
+        }
     }
+
+    // return {
+    //     type: SAVE_USER,
+    //     payload: userSession
+    // }
 }
 
 const logUserOut = () => {
