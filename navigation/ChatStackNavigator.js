@@ -50,6 +50,7 @@ export default function ChatStackNavigator() {
                                         name="message-plus-outline"
                                         color="#5050A5"
                                         size="32px"
+                                        onPress={() => navigation.navigate("NewChatroom")}
                                     />
                                 </View>
                             )
