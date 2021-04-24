@@ -59,7 +59,8 @@ const setChatRooms = (token) => {
             for (var key of chatroomsKeys) {
                 var chatroom = new ChatRoom(key,
                                             chatrooms[key].createdDate,
-                                            chatrooms[key].name,
+                                            chatrooms[key].names.name_1,
+                                            chatrooms[key].names.name_2,
                                             chatrooms[key].image,
                                             messagesArr,
                                             chatrooms[key].isPublicChat)

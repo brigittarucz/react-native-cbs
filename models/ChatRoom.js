@@ -1,8 +1,9 @@
 class ChatRoom {
-    constructor(id, createdDate, name, image, chatMessages, isPublicChat) {
+    constructor(id, createdDate, name, name_2, image, chatMessages, isPublicChat) {
         this.id = id;
         this.createdDate = createdDate;
         this.name = name;
+        this.name_2 = name_2;
         this.image = image;
         this.chatMessages = chatMessages.filter(message => message.chatId === id);
         this.isPublicChat = isPublicChat;

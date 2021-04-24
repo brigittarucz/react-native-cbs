@@ -11,23 +11,25 @@ import { useState } from 'react';
 import SendMessage from './SendMessage/SendMessage';
 
 const ChatMessage = props => {
+
     var chatroom = props.route.params.item;
     var messages = chatroom.chatMessages;
 
     const [flatlist, setFlatlist] = useState(<Text>Loading</Text>)
-
+    const [sendAMessage, setSendAMessage] = useState(<SendMessage chatroom={props.route.params.item}/>)
     const userFrom = useSelector((state) => state.UserReducer.userSession);
 
-    // DB call for user
-
     if(!chatroom.isPublicChat) {
-        const userToId = chatroom.chatMessages[0].userFrom === userFrom.id ?
-                       chatroom.chatMessages[0].userTo : 
-                       chatroom.chatMessages[0].userFrom;
-
+        
+        var userToId =  (chatroom.chatMessages.length === 0) ?
+                        props.userTo :
+                        (chatroom.chatMessages[0].userFrom === userFrom.id) ?
+                        chatroom.chatMessages[0].userTo : 
+                        chatroom.chatMessages[0].userFrom;
+                
         getUser(userToId, useSelector((state) => state.UserReducer.idToken))
-            .then(userTo => {
-
+        .then(userTo => {
+            
             // User from DB to add image 
 
             var flatlistGenerated = (
@@ -44,6 +46,11 @@ const ChatMessage = props => {
                 />
             )
 
+            var sendMessage = (
+                <SendMessage userTo={props.userTo} chatroom={props.route.params.item}/>
+            )
+
+            setSendAMessage(sendMessage);
             setFlatlist(flatlistGenerated);
             }).catch(error => {
                 throw new Error("Cannot get individual user")
@@ -81,7 +88,7 @@ const ChatMessage = props => {
     return (
         <View style={{height: '100%', width: '100%'}}>
             {flatlist}
-            <SendMessage />
+            {sendAMessage}
         </View>
     )
 }
