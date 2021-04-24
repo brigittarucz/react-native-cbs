@@ -1,5 +1,7 @@
-import ChatRoom from '../../models/ChatRoom';
 import { SET_MESSAGES, CREATE_CHATROOM, SET_CHATROOMS } from '../constants/ConstantsActions';
+
+import ChatRoom from '../../models/ChatRoom';
+import ChatMessage from '../../models/ChatMessage';
 
 const setMessages = (messages) => {
     return {
@@ -21,12 +23,13 @@ const setChatRooms = (token) => {
         )    
         
         var chatrooms = await response.json();
-    
+        var chatroomsKeys = Object.keys(chatrooms);
+
         if(!response.ok) {
             throw new Error("Could not retrieve chatrooms")
         } else {
             const response = await fetch(
-                'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/chatrooms.json?auth=' + token, {
+                'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/messages.json?auth=' + token, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json'
@@ -35,14 +38,44 @@ const setChatRooms = (token) => {
             )
             
             var messages = await response.json();
-    
+            var messagesKeys = Object.keys(messages);
+
+            var messagesArr = []
+
+            for (var key of messagesKeys) {
+                var message = new ChatMessage(key,
+                                              messages[key].chatId,
+                                              messages[key].createdDate,
+                                              messages[key].message,
+                                              messages[key].userIds.id_from,
+                                              messages[key].userIds.id_to,
+                                              messages[key].read)
+                messagesArr.push(message);
+            }
+
+            var chatroomsPublicArr = [];
+            var chatroomsPrivateArr = [];
+
+            for (var key of chatroomsKeys) {
+                var chatroom = new ChatRoom(key,
+                                            chatrooms[key].createdDate,
+                                            chatrooms[key].name,
+                                            chatrooms[key].image,
+                                            messagesArr,
+                                            chatrooms[key].isPublicChat)
+                                            
+                if(chatrooms[key].isPublicChat === true) {
+                    chatroomsPublicArr.push(chatroom)
+                } else {
+                    chatroomsPrivateArr.push(chatroom)
+                }
+            }
+
             if(!response.ok) {
                 throw new Error("Could not retrieve messages")
             } else {
-                console.log(chatrooms);
-                console.log(messages);
-    
-                dispatch({type: SET_CHATROOMS, payload: chatrooms });
+                dispatch({type: SET_CHATROOMS, payload: {publicChats: chatroomsPublicArr,
+                                                         privateChats: chatroomsPrivateArr } });
             }
         }
     }

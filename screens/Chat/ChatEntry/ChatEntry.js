@@ -7,7 +7,7 @@ import ChatRoom from '../../../components/ChatRoom/ChatRoom';
 import { useNavigation } from '@react-navigation/native';
 
 const ChatEntry = props => {
-    console.log(props.chatrooms);
+    // console.log(props.chatrooms);
     const navigation = useNavigation();
     return (
         <View>

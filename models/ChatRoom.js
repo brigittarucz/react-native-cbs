@@ -6,8 +6,10 @@ class ChatRoom {
         this.image = image;
         this.chatMessages = chatMessages.filter(message => message.chatId === id);
         this.isPublicChat = isPublicChat;
-        this.lastMessage = this.chatMessages[this.chatMessages.length-1].message;
-        this.lastMessageDate = this.chatMessages[this.chatMessages.length-1].createdDate;
+        this.lastMessage = this.chatMessages.length !== 0 ?
+                           this.chatMessages[this.chatMessages.length-1].message : '';
+        this.lastMessageDate = this.chatMessages.length !== 0 ?
+                               this.chatMessages[this.chatMessages.length-1].createdDate : 0;
     }
 }
 

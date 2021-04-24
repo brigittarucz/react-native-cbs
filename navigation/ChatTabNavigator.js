@@ -13,11 +13,10 @@ export default function ChatTabNavigator() {
     const Tab = createMaterialTopTabNavigator();
 
     const loggedInUser = useSelector((state) => state.UserReducer.userSession);
-    var tabScreens = null;
  
     // Filter private and public chats
-    const publicChatRooms = CHATROOMS.filter(chatroom => chatroom.isPublicChat)
-    const privateChatRooms = CHATROOMS.filter(chatroom => !chatroom.isPublicChat)
+    const publicChatRooms = useSelector((state) => state.ChatReducer.publicChats)
+    const privateChatRooms = useSelector((state) => state.ChatReducer.privateChats)
 
     return (
         <Tab.Navigator
