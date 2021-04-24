@@ -20,13 +20,13 @@ const ChatMessage = props => {
     const userFrom = useSelector((state) => state.UserReducer.userSession);
 
     if(!chatroom.isPublicChat) {
-        
+        console.log
         var userToId =  (chatroom.chatMessages.length === 0) ?
-                        props.userTo :
+                        props.route.params.userTo :
                         (chatroom.chatMessages[0].userFrom === userFrom.id) ?
                         chatroom.chatMessages[0].userTo : 
                         chatroom.chatMessages[0].userFrom;
-                
+
         getUser(userToId, useSelector((state) => state.UserReducer.idToken))
         .then(userTo => {
             
@@ -47,7 +47,7 @@ const ChatMessage = props => {
             )
 
             var sendMessage = (
-                <SendMessage userTo={props.userTo} chatroom={props.route.params.item}/>
+                <SendMessage userTo={props.route.params.userTo} chatroom={props.route.params.item}/>
             )
 
             setSendAMessage(sendMessage);

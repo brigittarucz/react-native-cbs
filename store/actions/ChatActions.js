@@ -1,4 +1,4 @@
-import { SET_MESSAGES, CREATE_CHATROOM, SET_CHATROOMS } from '../constants/ConstantsActions';
+import { SET_MESSAGES, CREATE_CHATROOM, SET_CHATROOMS, CREATE_MESSAGE } from '../constants/ConstantsActions';
 
 import ChatRoom from '../../models/ChatRoom';
 import ChatMessage from '../../models/ChatMessage';
@@ -82,24 +82,26 @@ const setChatRooms = (token) => {
     }
 }
 
-const createChatroom = (chatroomName) => {
+const createChatroom = (chatroom) => {
     return async (dispatch, getState) => {
 
-        // let chatroom = new ChatRoom('', new Date(), [chatroomName], '', [], false, [], [])
-
         const token = getState().UserReducer.idToken;
-        console.log(token);
 
         const response = await fetch(
-            'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/chatrooms.json?auth=' + token, {
+            'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/chatrooms/' + chatroom.id + '.json?auth=' + token, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    name: chatroomName,
-                    createdDate: new Date(),
-                    chatMessages: []
+                    name: chatroom.name,
+                    createdDate: chatroom.createdDate,
+                    image: chatroom.image,
+                    isPublicChat: chatroom.isPublicChat,
+                    names: {
+                        name_1: chatroom.name,
+                        name_2: chatroom.name_2
+                    }
                 })
             }
         )
@@ -107,10 +109,43 @@ const createChatroom = (chatroomName) => {
         const data = await response.json(); // json to javascript
         console.log(data);
         if (!response.ok) {
-            //There was a problem..
+            throw new Error("Cannot create chatroom")
         } else {
-            // chatroom.id = data.name;
-            dispatch({type: CREATE_CHATROOM, payload: data.name });
+            dispatch({type: CREATE_CHATROOM, payload: data });
+        }
+    }
+}
+
+const createMessage = (message) => {
+    return async (dispatch, getState) => {
+
+        const token = getState().UserReducer.idToken;
+
+        const response = await fetch(
+            'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/messages/' + message.id + '.json?auth=' + token, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    chatId: message.chatId,
+                    createdDate: message.createdDate,
+                    message: message.message,
+                    userIds: {
+                        id_from: message.userFrom,
+                        id_to: message.userTo
+                    },
+                    isPublicChat: false
+                })
+            }
+        )
+
+        const data = await response.json(); // json to javascript
+        console.log(data);
+        if (!response.ok) {
+            throw new Error("Cannot create message")
+        } else {
+            dispatch({type: CREATE_MESSAGE, payload: data });
         }
     }
 }
@@ -118,5 +153,6 @@ const createChatroom = (chatroomName) => {
 export default {
     setMessages,
     createChatroom,
-    setChatRooms
+    setChatRooms,
+    createMessage
 }

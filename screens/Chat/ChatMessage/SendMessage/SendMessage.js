@@ -7,7 +7,7 @@ const SendMessage = props => {
 
     console.log(props.userTo);
     console.log(props.chatroom);
-    
+
     const textChangeHandler = () => {
         console.log("Text Change Handler")
     }
