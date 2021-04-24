@@ -2,7 +2,7 @@
 import 'react-native-gesture-handler';
 import React from 'react';
 import { View, FlatList, Image, TextInput, Button, TouchableOpacity } from 'react-native';
-import { chatStartStyles } from './styles';
+
 import { USERS } from '../../../data/dummy-data';
 import { useDispatch, useSelector } from 'react-redux';
 import chatActions from '../../../store/actions/ChatActions';
