@@ -1,20 +1,65 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import 'react-native-gesture-handler';
 import { View, Image, TextInput, Button } from 'react-native';
 import { chatStartStyles } from './styles';
+import { useSelector, useDispatch } from "react-redux";
+import chatActions from '../../../../store/actions/ChatActions';
+import {uuid} from 'uuidv4';
+import ChatMessage from '../../../../models/ChatMessage';
 
 const SendMessage = props => {
+ 
+    const dispatch = useDispatch();
 
-    console.log(props.userTo);
-    console.log(props.chatroom);
+    const userFrom = useSelector((state) => state.UserReducer.userSession);
+    const [userInput, setUserInput] = useState('');
 
-    const textChangeHandler = () => {
-        console.log("Text Change Handler")
+    var messages = props.messages;
+
+    // Component requires intense debugging
+    // console.log(messages);
+    // console.log(userFrom);
+    // console.log(props.userTo);
+    // console.log(props.chatroom);
+
+    const textChangeHandler = (event) => {
+        setUserInput(event);
     }
 
     const sendMessageHandler = () => {
-        console.log("Send Message")
+        var newMessage = new ChatMessage(uuid(), 
+                                         messages.length !== 0 ?
+                                         messages[0].chatId : 
+                                         props.chatroom.chatId, 
+                                         new Date().getTime(), 
+                                         userInput, 
+                                         userFrom.id, 
+                                         props.userTo, 
+                                         true)
+
+        console.log(newMessage)
+        messages.push(newMessage);
+        // Push new message to state
+        dispatch(chatActions.setMessages(
+            {messages: messages}
+        ))
+
+        // Store new chatroom in DB if first message
+        console.log(props.chatroom);
+        if(messages.length === 0) {
+            console.log("Here");
+            dispatch(chatActions.createChatroom(props.chatroom));
+        }
+
+        // Store new message
+        dispatch(chatActions.createMessage(newMessage));
+
     }
+
+    useEffect(() => {
+        dispatch(chatActions.setMessages(
+            {messages: messages})       
+    )}, [messages])
 
     return (
         <View style={chatStartStyles.start}>

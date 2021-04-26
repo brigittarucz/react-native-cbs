@@ -4,6 +4,7 @@ import ChatRoom from '../../models/ChatRoom';
 import ChatMessage from '../../models/ChatMessage';
 
 const setMessages = (messages) => {
+    console.log(messages);
     return {
         type: SET_MESSAGES,
         payload: messages
@@ -154,5 +155,5 @@ export default {
     setMessages,
     createChatroom,
     setChatRooms,
-    createMessage
+    createMessage,
 }
