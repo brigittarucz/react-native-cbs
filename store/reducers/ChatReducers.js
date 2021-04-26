@@ -1,4 +1,8 @@
-import { SET_MESSAGES, CREATE_CHATROOM, SET_CHATROOMS, CREATE_MESSAGE } from '../constants/ConstantsActions';
+import { SET_MESSAGES, 
+         CREATE_CHATROOM, 
+         SET_CHATROOMS, 
+         CREATE_MESSAGE,
+         SET_UPDATE_CHATROOMS_PRIVATE } from '../constants/ConstantsActions';
 
 const ChatReducer = (state = {messages: [], publicChats: [], privateChats: []}, action) => {
     switch(action.type) {
@@ -24,6 +28,13 @@ const ChatReducer = (state = {messages: [], publicChats: [], privateChats: []}, 
             return {
                 ...state,
             }
+        case SET_UPDATE_CHATROOMS_PRIVATE: {
+        console.log(action.payload);
+            return {
+                ...state,
+                privateChats: action.payload
+            }
+        }
         default:
             return state
     }

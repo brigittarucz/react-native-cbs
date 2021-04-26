@@ -16,7 +16,9 @@ const SendMessage = props => {
 
     var messages = props.messages;
 
+    var privateChats = useSelector((state) => state.ChatReducer.privateChats)
     console.log("Crazy");
+    console.log(messages);
 
     // Component requires intense debugging
     // console.log(messages);
@@ -27,6 +29,8 @@ const SendMessage = props => {
     const textChangeHandler = (event) => {
         setUserInput(event);
     }
+
+    // Set chatrooms new state use effect
 
     const sendMessageHandler = () => {
         var newMessage = new ChatMessage(uuid(), 
@@ -47,14 +51,27 @@ const SendMessage = props => {
         ))
 
         // Store new chatroom in DB if first message
-        console.log(props.chatroom);
         if(messages.length === 1) {
-            console.log("Here");
-            dispatch(chatActions.createChatroom(props.chatroom));
+            dispatch(chatActions.createChatroom(props.chatroom)).then(res => {
+                newMessage.chatId = res.name;
+                dispatch(chatActions.createMessage(newMessage));
+                privateChats.push(props.chatroom);
+                dispatch(chatActions.setUpdateChatRoomsPrivate(privateChats));
+            })
+        } else {
+            // Store new message
+            for(var i = 0; i < privateChats.length; i++) {
+                if(privateChats[i].id === props.chatroom.id) {
+                    privateChats[i].chatMessages = messages;
+                    privateChats[i].lastMessage = userInput;
+                    privateChats[i].lastMessageDate = newMessage.createdDate;
+                    
+                    dispatch(chatActions.setUpdateChatRoomsPrivate(privateChats));
+                }
+            }
+            dispatch(chatActions.createMessage(newMessage));
         }
 
-        // Store new message
-        dispatch(chatActions.createMessage(newMessage));
 
     }
 

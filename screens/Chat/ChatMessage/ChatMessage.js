@@ -12,6 +12,7 @@ import chatActions from '../../../store/actions/ChatActions';
 import SendMessage from './SendMessage/SendMessage';
 
 const ChatMessage = props => {
+    const dispatch = useDispatch();
 
     var chatroom = props.route.params.item;
     var messages = chatroom.chatMessages;
@@ -21,6 +22,8 @@ const ChatMessage = props => {
     const [sendAMessage, setSendAMessage] = useState(<SendMessage messages={props.route.params.item.chatMessages} chatroom={props.route.params.item}/>)
     const userFrom = useSelector((state) => state.UserReducer.userSession);
     const idToken = useSelector((state) => state.UserReducer.idToken);
+   
+    // Update component by updating chatrooms
 
     if(!didComponentInitialize) {
         if(!chatroom.isPublicChat) {

@@ -1,13 +1,23 @@
-import { SET_MESSAGES, CREATE_CHATROOM, SET_CHATROOMS, CREATE_MESSAGE } from '../constants/ConstantsActions';
+import { SET_MESSAGES, 
+         CREATE_CHATROOM, 
+         SET_CHATROOMS, 
+         CREATE_MESSAGE,
+         SET_UPDATE_CHATROOMS_PRIVATE } from '../constants/ConstantsActions';
 
 import ChatRoom from '../../models/ChatRoom';
 import ChatMessage from '../../models/ChatMessage';
 
 const setMessages = (messages) => {
-    console.log(messages);
     return {
         type: SET_MESSAGES,
         payload: messages
+    }
+}
+
+const setUpdateChatRoomsPrivate = (chatroomsPrivate) => {
+    return {
+        type: SET_UPDATE_CHATROOMS_PRIVATE,
+        payload: chatroomsPrivate
     }
 }
 
@@ -113,6 +123,7 @@ const createChatroom = (chatroom) => {
             throw new Error("Cannot create chatroom")
         } else {
             dispatch({type: CREATE_CHATROOM, payload: data });
+            return data;
         }
     }
 }
@@ -156,4 +167,5 @@ export default {
     createChatroom,
     setChatRooms,
     createMessage,
+    setUpdateChatRoomsPrivate
 }

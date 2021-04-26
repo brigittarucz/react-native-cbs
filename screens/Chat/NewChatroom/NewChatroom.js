@@ -119,10 +119,11 @@ const UserResult = (props) => {
 
         if(chatroom !== false) {
             // If yes import chat room and navigate
+            console.log(chatroom);
             chatroom = new ChatRoom(chatroom.id,
                                     chatroom.createdDate,
-                                    chatroom.names.name_1,
-                                    chatroom.names.name_2,
+                                    chatroom.name,
+                                    chatroom.name_2,
                                     chatroom.image,
                                     chatroom.chatMessages,
                                     chatroom.isPublicChat)
