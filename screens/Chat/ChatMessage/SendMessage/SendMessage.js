@@ -16,6 +16,8 @@ const SendMessage = props => {
 
     var messages = props.messages;
 
+    console.log("Crazy");
+
     // Component requires intense debugging
     // console.log(messages);
     // console.log(userFrom);
@@ -46,7 +48,7 @@ const SendMessage = props => {
 
         // Store new chatroom in DB if first message
         console.log(props.chatroom);
-        if(messages.length === 0) {
+        if(messages.length === 1) {
             console.log("Here");
             dispatch(chatActions.createChatroom(props.chatroom));
         }

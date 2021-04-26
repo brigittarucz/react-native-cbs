@@ -89,7 +89,7 @@ const createChatroom = (chatroom) => {
         const token = getState().UserReducer.idToken;
 
         const response = await fetch(
-            'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/chatrooms/' + chatroom.id + '.json?auth=' + token, {
+            'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/chatrooms/.json?auth=' + token, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -123,7 +123,7 @@ const createMessage = (message) => {
         const token = getState().UserReducer.idToken;
 
         const response = await fetch(
-            'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/messages/' + message.id + '.json?auth=' + token, {
+            'https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/messages/.json?auth=' + token, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
