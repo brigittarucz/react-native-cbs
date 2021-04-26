@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 import ChatTo from '../ChatIndividual/ChatTo/ChatTo';
 import ChatFrom from '../ChatIndividual/ChatFrom/ChatFrom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import chatActions from '../../../store/actions/ChatActions';
 import SendMessage from './SendMessage/SendMessage';
@@ -14,17 +14,24 @@ import SendMessage from './SendMessage/SendMessage';
 const ChatMessage = props => {
     const dispatch = useDispatch();
 
+    console.log(props.route.params);
+
     var chatroom = props.route.params.item;
     var messages = chatroom.chatMessages;
+    // var messages = props.route.params.messages;
 
     const [didComponentInitialize, setDidComponentInitialize] = useState(false);
     const [flatlist, setFlatlist] = useState(<Text>Loading</Text>)
     const [sendAMessage, setSendAMessage] = useState(<SendMessage messages={props.route.params.item.chatMessages} chatroom={props.route.params.item}/>)
     const userFrom = useSelector((state) => state.UserReducer.userSession);
     const idToken = useSelector((state) => state.UserReducer.idToken);
-   
-    // Update component by updating chatrooms
 
+    // Update component by updating chatrooms
+    useEffect(() => {
+        dispatch(chatActions.setMessages(
+            {messages: messages})       
+    )}, [messages])
+    
     if(!didComponentInitialize) {
         if(!chatroom.isPublicChat) {
             var userToId =  (chatroom.chatMessages.length === 0) ?

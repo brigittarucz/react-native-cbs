@@ -17,8 +17,8 @@ const SendMessage = props => {
     var messages = props.messages;
 
     var privateChats = useSelector((state) => state.ChatReducer.privateChats)
-    console.log("Crazy");
-    console.log(messages);
+    // console.log("Crazy");
+    // console.log(messages);
 
     // Component requires intense debugging
     // console.log(messages);
@@ -43,7 +43,7 @@ const SendMessage = props => {
                                          props.userTo, 
                                          true)
 
-        console.log(newMessage)
+        // console.log(newMessage)
         messages.push(newMessage);
         // Push new message to state
         dispatch(chatActions.setMessages(

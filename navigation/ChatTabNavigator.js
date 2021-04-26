@@ -17,7 +17,7 @@ export default function ChatTabNavigator() {
     // Filter private and public chats
     const publicChatRooms = useSelector((state) => state.ChatReducer.publicChats)
     const privateChatRooms = useSelector((state) => state.ChatReducer.privateChats)
-
+console.log(privateChatRooms.chatMessages)
     return (
         <Tab.Navigator
             tabBarOptions={{
@@ -34,11 +34,11 @@ export default function ChatTabNavigator() {
             }}> 
             <Tab.Screen 
                 name="CBS Surf" 
-                children={() => <ChatEntry chatrooms={publicChatRooms}/>}
+                children={() => <ChatEntry chatrooms={publicChatRooms} />}
                 />           
             <Tab.Screen 
                 name={loggedInUser.email} 
-                children={() => <ChatEntry chatrooms={privateChatRooms}/>} 
+                children={() => <ChatEntry chatrooms={privateChatRooms} />} 
                 />  
         </Tab.Navigator>
     )

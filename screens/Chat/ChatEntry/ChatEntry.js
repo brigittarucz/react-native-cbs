@@ -9,6 +9,7 @@ import { useNavigation } from '@react-navigation/native';
 const ChatEntry = props => {
     // console.log(props.chatrooms);
     const navigation = useNavigation();
+
     return (
         <View>
             <FlatList
@@ -16,7 +17,7 @@ const ChatEntry = props => {
                 keyExtractor={item => item.id.toString()}
                 renderItem={itemData => (
                     <TouchableOpacity onPress={() => 
-                        navigation.navigate('ChatMessage', {item: itemData.item})} >
+                        navigation.navigate('ChatMessage', {item: itemData.item, messages: props.messages})} >
                             <ChatRoom item={itemData.item}/>
                     </TouchableOpacity>
                 )} />
