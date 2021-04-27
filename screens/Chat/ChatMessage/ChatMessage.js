@@ -53,7 +53,7 @@ const ChatMessage = props => {
             .then(userTo => {
                 
                 // User from DB to add image 
-
+                console.log(chatroom.chatMessages);
                 var flatlistGenerated = (
                     <FlatList 
                         data={messages}

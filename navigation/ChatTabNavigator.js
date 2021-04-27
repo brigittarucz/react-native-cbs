@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 
 import ChatEntry from '../screens/Chat/ChatEntry/ChatEntry';
 
-export default function ChatTabNavigator() {
+export default function ChatTabNavigator(props) {
     const Tab = createMaterialTopTabNavigator();
 
     const loggedInUser = useSelector((state) => state.UserReducer.userSession);
@@ -17,7 +17,8 @@ export default function ChatTabNavigator() {
     // Filter private and public chats
     const publicChatRooms = useSelector((state) => state.ChatReducer.publicChats)
     const privateChatRooms = useSelector((state) => state.ChatReducer.privateChats)
-console.log(privateChatRooms.chatMessages)
+
+    console.log(props.route.params);
     return (
         <Tab.Navigator
             tabBarOptions={{

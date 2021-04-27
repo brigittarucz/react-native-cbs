@@ -140,7 +140,7 @@ const UserResult = (props) => {
                                     [],
                                     false);
 
-            navigation.navigate('ChatMessage', {item: chatroom, userTo: props.id});
+            navigation.navigate('ChatMessage', {item: chatroom, userTo: props.id, messages: []});
         }
         
     

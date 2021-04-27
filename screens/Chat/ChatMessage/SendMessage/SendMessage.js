@@ -6,9 +6,9 @@ import { useSelector, useDispatch } from "react-redux";
 import chatActions from '../../../../store/actions/ChatActions';
 import {uuid} from 'uuidv4';
 import ChatMessage from '../../../../models/ChatMessage';
-
+import { useNavigation } from '@react-navigation/native';
 const SendMessage = props => {
- 
+    const navigation = useNavigation();
     const dispatch = useDispatch();
 
     const userFrom = useSelector((state) => state.UserReducer.userSession);
@@ -38,8 +38,8 @@ const SendMessage = props => {
                                          props.chatroom.chatId, 
                                          new Date().getTime(), 
                                          userInput, 
-                                         userFrom.id, 
                                          props.userTo, 
+                                         userFrom.id, 
                                          true)
 
         // console.log(newMessage)
@@ -51,11 +51,18 @@ const SendMessage = props => {
 
         // Store new chatroom in DB if first message
         if(messages.length === 1) {
-            dispatch(chatActions.createChatroom(props.chatroom)).then(res => {
+            var chatroom = props.chatroom;
+            chatroom.chatMessages = messages;
+            chatroom.lastMessage = userInput;
+            chatroom.lastMessageDate = new Date().getTime();
+
+            dispatch(chatActions.createChatroom(chatroom)).then(res => {
                 newMessage.chatId = res.name;
                 dispatch(chatActions.createMessage(newMessage));
-                privateChats.push(props.chatroom);
+                privateChats.push(chatroom);
+                console.log(chatroom);
                 dispatch(chatActions.setUpdateChatRoomsPrivate(privateChats));
+                navigation.navigate('ChatTabNavigator', {item: privateChats})
             })
         } else {
             // Store new message
@@ -71,6 +78,7 @@ const SendMessage = props => {
             dispatch(chatActions.createMessage(newMessage));
         }
 
+        
         props.addedNew(newMessage);
     }
 
