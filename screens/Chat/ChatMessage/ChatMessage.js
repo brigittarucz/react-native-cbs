@@ -26,12 +26,12 @@ const ChatMessage = props => {
     const userFrom = useSelector((state) => state.UserReducer.userSession);
     const idToken = useSelector((state) => state.UserReducer.idToken);
 
-    // Update component by updating chatrooms
+    // Update component by updating messages
     useEffect(() => {
         dispatch(chatActions.setMessages(
             {messages: messages})       
     )}, [messages])
-    
+
     if(!didComponentInitialize) {
         if(!chatroom.isPublicChat) {
             var userToId =  (chatroom.chatMessages.length === 0) ?

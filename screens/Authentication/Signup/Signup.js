@@ -6,6 +6,7 @@ import Input from '../../../components/UI/Input';
 import userActions from '../../../store/actions/UserActions';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useNavigation } from '@react-navigation/native';
+import eventActions from '../../../store/actions/EventActions';
 
 
 const Signup = props => {
@@ -28,7 +29,11 @@ const Signup = props => {
    const handleSignup = () => {
       if(password === passwordRepeat) {
          setDisplayStatus(<ActivityIndicator size="large" color="#0000ff"/>)
-         dispatch(userActions.signUserUp(name, email, password));
+         dispatch(userActions.signUserUp(name, email, password))
+            .then(() => {
+               dispatch(eventActions.setUserEvents())
+                  .catch(error => console.log(error))
+            })
       } else if (password.length < 6) {
          setDisplayStatus(<Text>Password too weak!</Text>)
       } else {

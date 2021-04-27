@@ -7,6 +7,7 @@ import chatActions from '../../../store/actions/ChatActions';
 import { USERS } from '../../../data/dummy-data';
 import { useState } from 'react';
 import Input from '../../../components/UI/Input';
+import eventActions from '../../../store/actions/EventActions';
 
 const Login = props => {
     const navigation = useNavigation();
@@ -29,6 +30,10 @@ const Login = props => {
                 dispatch(userActions.logUserIn(email, password))
                     .then(res => {
                         dispatch(chatActions.setChatRooms(res))
+                            .then(() => {
+                                dispatch(eventActions.setUserEvents())
+                                .catch(error => { console.log(error)})
+                            })
                             .catch(error => {
                                 console.log(error)
                             })

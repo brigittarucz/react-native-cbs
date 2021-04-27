@@ -17,7 +17,6 @@ const SendMessage = props => {
     var messages = props.messages;
 
     var privateChats = useSelector((state) => state.ChatReducer.privateChats)
-    // console.log("Crazy");
     // console.log(messages);
 
     // Component requires intense debugging
