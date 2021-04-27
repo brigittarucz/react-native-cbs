@@ -1,8 +1,10 @@
-import 'react-native-gesture-handler';
+// REACT
 import React from 'react';
+// REACT NATIVE
+import 'react-native-gesture-handler';
 import { View, Text, Image } from 'react-native';
+// OTHERS
 import { chatFromStyles } from './styles';
-
 
 const ChatFrom = (props) => {
     return (

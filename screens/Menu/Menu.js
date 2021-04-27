@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
-import ProfileStackNavigator from '../navigation/ProfileStackNavigator';
+import ProfileStackNavigator from '../../navigation/ProfileStackNavigator';
 
-const Menu = props => {
-    
+const Menu = () => {
     return (
         <ProfileStackNavigator />
     )

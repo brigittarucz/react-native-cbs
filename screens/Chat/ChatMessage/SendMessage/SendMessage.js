@@ -1,12 +1,19 @@
+// REACT
 import React, { useState, useEffect } from 'react';
+// REACT NATIVE
 import 'react-native-gesture-handler';
 import { View, Image, TextInput, Button } from 'react-native';
-import { chatStartStyles } from './styles';
+// REDUX
 import { useSelector, useDispatch } from "react-redux";
 import chatActions from '../../../../store/actions/ChatActions';
-import {uuid} from 'uuidv4';
-import ChatMessage from '../../../../models/ChatMessage';
+// NAVIGATION
 import { useNavigation } from '@react-navigation/native';
+// MODELS
+import ChatMessage from '../../../../models/ChatMessage';
+// OTHERS
+import { chatStartStyles } from './styles';
+import { uuid } from 'uuidv4';
+
 const SendMessage = props => {
     const navigation = useNavigation();
     const dispatch = useDispatch();

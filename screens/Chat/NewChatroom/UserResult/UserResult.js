@@ -1,11 +1,15 @@
-import 'react-native-gesture-handler';
+// REACT
 import React from "react";
+// REACT NATIVE
+import 'react-native-gesture-handler';
 import { View, Text, TouchableOpacity } from 'react-native';
-
+// REDUX
 import { useSelector } from 'react-redux';
+// NAVIGATION
 import { useNavigation } from '@react-navigation/native';
-
+// COMPONENTS
 import ChatRoom from '../../../../models/ChatRoom';
+// OTHERS
 import { uuid } from 'uuidv4';
 
 const UserResult = (props) => {
@@ -14,7 +18,7 @@ const UserResult = (props) => {
     const userSessionName = useSelector((state) => state.UserReducer.userSession.name);
 
     const handleSetChatroom = () => {
-        console.log(props.item);
+        // console.log(props.item);
 
         // Check if the users have previously chatted
         var chatroom = false;
@@ -33,7 +37,7 @@ const UserResult = (props) => {
 
         if(chatroom !== false) {
             // If yes import chat room and navigate
-            console.log(chatroom);
+            // console.log(chatroom);
             chatroom = new ChatRoom(chatroom.id,
                                     chatroom.createdDate,
                                     chatroom.name,

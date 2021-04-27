@@ -14,3 +14,17 @@ const rootReducer = combineReducers({
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 export default store;
+
+// REACT
+
+// REACT NATIVE
+
+// REDUX
+
+// NAVIGATION
+
+// COMPONENTS
+
+// MODELS
+
+// OTHERS

@@ -1,6 +1,9 @@
-import 'react-native-gesture-handler';
+// REACT
 import React from 'react';
+// REACT NATIVE
+import 'react-native-gesture-handler';
 import { View, Text } from 'react-native';
+// OTHERS
 import { chatToStyles } from './styles';
 
 const ChatTo = (props) => {

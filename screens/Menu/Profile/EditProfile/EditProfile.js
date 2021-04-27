@@ -5,8 +5,8 @@ import { View, Text, Button, Image } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
 
-import Input from '../../../components/UI/Input';
-import userActions from '../../../store/actions/UserActions';
+import Input from '../../../../components/UI/Input';
+import userActions from '../../../../store/actions/UserActions';
 
 
 const EditProfile = props => {

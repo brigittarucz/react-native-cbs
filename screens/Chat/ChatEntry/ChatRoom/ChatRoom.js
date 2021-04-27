@@ -1,7 +1,10 @@
-import React from 'React';
+// REACT
+import React from 'react';
+// REACT NATIVE
 import { View, Text, Image } from 'react-native';
-import { format, differenceInSeconds } from 'date-fns'
+// OTHERS
 import { chatRoomStyles } from './styles';
+import { format, differenceInSeconds } from 'date-fns'
 
 const ChatRoom = props => {
     return (

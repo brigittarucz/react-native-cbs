@@ -1,16 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, Button, ActivityIndicator } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { useDispatch, useSelector } from 'react-redux';
+
+import { useDispatch } from 'react-redux';
 import userActions from '../../../store/actions/UserActions';
 import chatActions from '../../../store/actions/ChatActions';
-import { USERS } from '../../../data/dummy-data';
-import { useState } from 'react';
+
 import Input from '../../../components/UI/Input';
 import eventActions from '../../../store/actions/EventActions';
 
-const Login = props => {
-    const navigation = useNavigation();
+const Login = () => {
     const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
 
@@ -18,7 +16,6 @@ const Login = props => {
     const [emailValid, setEmailValid] = useState(false);
     const [password, setPassword] = useState('password123');
     const [passwordValid, setPasswordValid] = useState(false);
-    const state = useSelector((state) => state);
 
     const [displayStatus, setDisplayStatus] = useState();
 

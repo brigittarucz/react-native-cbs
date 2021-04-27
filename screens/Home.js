@@ -2,7 +2,7 @@ import React from 'React';
 import { View, Text, StyleSheet } from 'react-native';
 import { useSelector } from 'react-redux';
 
-const Home = props => {
+const Home = () => {
     const events = useSelector((state) => state.EventReducer.events)
     console.log(events);
 

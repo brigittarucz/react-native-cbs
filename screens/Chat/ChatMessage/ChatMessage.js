@@ -1,16 +1,17 @@
-import React from 'react';
-
+// REACT
+import React, { useState, useEffect } from 'react';
+// REACT NATIVE
 import 'react-native-gesture-handler';
 import { View, FlatList, Text, TouchableOpacity } from 'react-native';
+// REDUX
 import { useSelector, useDispatch } from "react-redux";
-
+import chatActions from '../../../store/actions/ChatActions';
+// COMPONENTS
+import SendMessage from './SendMessage/SendMessage';
 import ChatTo from './ChatTo/ChatTo';
 import ChatFrom from './ChatFrom/ChatFrom';
-import { useState, useEffect } from 'react';
-
-import chatActions from '../../../store/actions/ChatActions';
-import SendMessage from './SendMessage/SendMessage';
-
+// OTHERS
+import { getUser } from '../utils';
 
 const ChatMessage = props => {
     const dispatch = useDispatch();
@@ -146,27 +147,5 @@ const ChatMessage = props => {
         </View>
     )
 }
-
-const getUser = async (id, token) => {
-    const response = await fetch(
-        "https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/users/" +
-            id +
-            ".json?auth=" +
-            token,
-        {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }
-    );
-
-    if (!response.ok) {
-        throw new Error("Could not get user");
-    } else {
-        var user = await response.json();
-        return user;
-    }
-};
 
 export default ChatMessage

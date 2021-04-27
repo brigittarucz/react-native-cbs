@@ -1,12 +1,7 @@
 import React from 'react';
 import 'react-native-gesture-handler';
-
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
-
-import { CHATROOMS } from './../data/dummy-data';
 import { useSelector } from "react-redux";
-
 import ChatEntry from '../screens/Chat/ChatEntry/ChatEntry';
 
 export default function ChatTabNavigator(props) {

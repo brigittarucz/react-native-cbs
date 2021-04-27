@@ -3,16 +3,14 @@ import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 import { useSelector } from 'react-redux';
 
-import Profile from '../screens/Profile/Profile';
-import EditProfile from '../screens/Profile/EditProfile/EditProfile';
-// import ChangePassword from '../screens/Profile/ChangePassword/ChangePassword';
-
+import Profile from '../screens/Menu/Profile/Profile';
+import EditProfile from '../screens/Menu/Profile/EditProfile/EditProfile';
 
 export default function ProfileStackNavigator() {
     const Stack = createStackNavigator();
     const loggedInUser = useSelector(state => state.UserReducer.userSession);
 
-    console.log(loggedInUser);
+    // console.log(loggedInUser);
 
     return (
         <Stack.Navigator initialRouteName="Profile">
@@ -20,8 +18,6 @@ export default function ProfileStackNavigator() {
                         component={() => <Profile loggedInUser={loggedInUser}/>} />
             <Stack.Screen name="Edit Profile"
                         component={() => <EditProfile loggedInUser={loggedInUser} />} />
-            {/* <Stack.Screen name="ChangePassword" 
-                        component={() => <ChangePassword loggedInUser={loggedInUser}/>} /> */}
         </Stack.Navigator>
     );
 }

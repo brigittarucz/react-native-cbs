@@ -1,11 +1,16 @@
-import 'react-native-gesture-handler';
+// REACT
 import React, { useState } from "react";
-import { View, Text, Button, FlatList, TouchableOpacity } from 'react-native';
-import Input from '../../../components/UI/Input';
+// REACT NATIVE
+import 'react-native-gesture-handler';
+import { View, Text, Button, FlatList} from 'react-native';
+// REDUX
 import { useSelector } from 'react-redux';
-
+// COMPONENTS
+import Input from '../../../components/UI/Input';
+// MODELS
 import UserResult from './UserResult/UserResult';
 import PrivateUser from '../../../models/PrivateUser';
+// OTHERS
 import { getUsers } from '../utils';
 
 const NewChatroom = () => {

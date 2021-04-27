@@ -1,13 +1,14 @@
+// REACT
 import React from 'react';
+// REACT NATIVE
 import 'react-native-gesture-handler';
-
 import { View, TouchableOpacity, FlatList } from 'react-native';
-
-import ChatRoom from './ChatRoom/ChatRoom';
+// NAVIGATION
 import { useNavigation } from '@react-navigation/native';
+// COMPONENTS
+import ChatRoom from './ChatRoom/ChatRoom';
 
 const ChatEntry = props => {
-    // console.log(props.chatrooms);
     const navigation = useNavigation();
 
     return (

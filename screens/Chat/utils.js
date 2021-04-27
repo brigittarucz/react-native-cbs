@@ -59,6 +59,28 @@ const getUsers = async (token) => {
     }
 };
 
+const getUser = async (id, token) => {
+    const response = await fetch(
+        "https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/users/" +
+            id +
+            ".json?auth=" +
+            token,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Could not get user");
+    } else {
+        var user = await response.json();
+        return user;
+    }
+};
 
 export {getChatRooms,
-        getUsers}
+        getUsers,
+        getUser}

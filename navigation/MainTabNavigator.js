@@ -8,10 +8,9 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Home from "../screens/Home";
 import ChatStackNavigator from "../navigation/ChatStackNavigator";
 import Discover from "../screens/Discover";
-import Menu from "../screens/Menu";
+import Menu from "../screens/Menu/Menu";
 import Login from "../screens/Authentication/Login/Login";
 import Signup from "../screens/Authentication/Signup/Signup";
-
 import { useSelector } from "react-redux";
 
 export default function MainTabNavigator() {

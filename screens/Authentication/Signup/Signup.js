@@ -4,12 +4,10 @@ import { View, Text, Button, StyleSheet, ActivityIndicator } from 'react-native'
 import { useDispatch } from 'react-redux';
 import Input from '../../../components/UI/Input';
 import userActions from '../../../store/actions/UserActions';
-import { createStackNavigator } from '@react-navigation/stack';
-import { useNavigation } from '@react-navigation/native';
 import eventActions from '../../../store/actions/EventActions';
 
 
-const Signup = props => {
+const Signup = () => {
    const dispatch = useDispatch();
    const [email, setEmail] = useState('');
    const [emailValid, setEmailValid] = useState(false);
@@ -19,12 +17,7 @@ const Signup = props => {
    const [nameValid, setNameValid] = useState(false);
    const [passwordRepeat, setPasswordRepeat] = useState('');
    const [passwordRepeatValid, setPasswordRepeatValid] = useState(false);
-
-
    const [displayStatus, setDisplayStatus] = useState();
-
-   const Stack = createStackNavigator();
-   const navigation = useNavigation();
 
    const handleSignup = () => {
       if(password === passwordRepeat) {

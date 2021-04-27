@@ -1,7 +1,7 @@
 import React from 'React';
 import { View, Text, StyleSheet } from 'react-native';
 
-const Discover = props => {
+const Discover = () => {
     return (
         <View>
             <Text>Hi, discover screen!</Text>
