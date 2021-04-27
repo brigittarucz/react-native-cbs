@@ -25,12 +25,21 @@ const ChatMessage = props => {
     const [sendAMessage, setSendAMessage] = useState(<SendMessage messages={props.route.params.item.chatMessages} chatroom={props.route.params.item}/>)
     const userFrom = useSelector((state) => state.UserReducer.userSession);
     const idToken = useSelector((state) => state.UserReducer.idToken);
-
+    const [newMessages, setNewMessages] = useState([]);
+    const [triggerRerender, setTriggerRerender] = useState(false);
     // Update component by updating messages
     useEffect(() => {
         dispatch(chatActions.setMessages(
             {messages: messages})       
     )}, [messages])
+
+    const newAddedMessage = (newMessage) => {
+        newMessages.push(newMessage);
+        setNewMessages(newMessages)
+        console.log(newMessages);
+        console.log("Add");
+        setTriggerRerender(!triggerRerender);
+    }
 
     if(!didComponentInitialize) {
         if(!chatroom.isPublicChat) {
@@ -60,7 +69,7 @@ const ChatMessage = props => {
                 )
 
                 var sendMessage = (
-                    <SendMessage messages={props.route.params.item.chatMessages} userTo={props.route.params.userTo} chatroom={props.route.params.item}/>
+                    <SendMessage addedNew={newAddedMessage} messages={props.route.params.item.chatMessages} userTo={props.route.params.userTo} chatroom={props.route.params.item}/>
                 )
 
                 setSendAMessage(sendMessage);
@@ -103,6 +112,14 @@ const ChatMessage = props => {
     return (
         <View style={{height: '100%', width: '100%'}}>
             {flatlist}
+            <FlatList
+                data={newMessages}
+                extraData={triggerRerender}
+                renderItem={itemData => {
+                    return <Text>You have received a new message!</Text>
+                    // return <ChatTo data={itemData.item} key={itemData.index.toString()}/>
+                }}   
+                keyExtractor={item => item.id.toString()} /> 
             {sendAMessage}
         </View>
     )

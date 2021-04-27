@@ -71,7 +71,7 @@ const SendMessage = props => {
             dispatch(chatActions.createMessage(newMessage));
         }
 
-
+        props.addedNew(newMessage);
     }
 
     useEffect(() => {
