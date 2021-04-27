@@ -1,7 +1,7 @@
 import React from 'react';
 
 import 'react-native-gesture-handler';
-import { View, FlatList, Text } from 'react-native';
+import { View, FlatList, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 
 import ChatTo from '../ChatIndividual/ChatTo/ChatTo';
@@ -10,6 +10,8 @@ import { useState, useEffect } from 'react';
 
 import chatActions from '../../../store/actions/ChatActions';
 import SendMessage from './SendMessage/SendMessage';
+import { chatRoomStyles } from '../../../components/ChatRoom/styles';
+
 
 const ChatMessage = props => {
     const dispatch = useDispatch();
@@ -19,7 +21,7 @@ const ChatMessage = props => {
     var chatroom = props.route.params.item;
     var messages = chatroom.chatMessages;
     // var messages = props.route.params.messages;
-
+    const chatrooms = useSelector((state) => state.ChatReducer.privateChats);
     const [didComponentInitialize, setDidComponentInitialize] = useState(false);
     const [flatlist, setFlatlist] = useState(<Text>Loading</Text>)
     const [sendAMessage, setSendAMessage] = useState(<SendMessage messages={props.route.params.item.chatMessages} chatroom={props.route.params.item}/>)
@@ -60,9 +62,13 @@ const ChatMessage = props => {
                         keyExtractor={item => item.id.toString()}
                         renderItem={itemData => {
                             if (itemData.item.userTo !== userToId) {
-                                return <ChatTo data={itemData.item} key={itemData.index.toString()}/>
+                                return  <TouchableOpacity key={itemData.index.toString()} onPress={() => deleteMessageHandler(itemData.index)}> 
+                                            <ChatTo data={itemData.item} />
+                                        </TouchableOpacity>
                             } else {
-                                return <ChatFrom data={itemData.item} key={itemData.index.toString()}/>
+                                return  <TouchableOpacity ey={itemData.index.toString()} onPress={() => deleteMessageHandler(itemData.index)}>
+                                            <ChatFrom data={itemData.item} />
+                                        </TouchableOpacity>
                             }
                         }}
                     />
@@ -108,6 +114,23 @@ const ChatMessage = props => {
     setDidComponentInitialize(true);
     }
         
+
+    const deleteMessageHandler = (id) => {
+        messages.splice(id,1);
+        dispatch(chatActions.setMessages(
+            {messages: messages}
+        ))
+
+        chatrooms.forEach(chat => {
+            if(chat.id === chatroom.id) {
+                chat.chatMessages = messages;
+            }
+        })
+
+        dispatch(chatActions.setUpdateChatRoomsPrivate(chatrooms));
+
+        setDidComponentInitialize(false)
+    }
 
     return (
         <View style={{height: '100%', width: '100%'}}>
