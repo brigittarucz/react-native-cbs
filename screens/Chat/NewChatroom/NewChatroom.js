@@ -2,15 +2,13 @@ import 'react-native-gesture-handler';
 import React, { useState } from "react";
 import { View, Text, Button, FlatList, TouchableOpacity } from 'react-native';
 import Input from '../../../components/UI/Input';
-import { useDispatch, useSelector } from 'react-redux';
-import { createChatroom } from '../../../store/actions/ChatActions';
-import chatActions from '../../../store/actions/ChatActions';
-import { useNavigation } from '@react-navigation/native';
+import { useSelector } from 'react-redux';
 
+import UserResult from './UserResult/UserResult';
 import PrivateUser from '../../../models/PrivateUser';
-import ChatRoom from '../../../models/ChatRoom';
-import { uuid } from 'uuidv4';
-const NewChatroom = props => {
+import { getUsers } from '../utils';
+
+const NewChatroom = () => {
    
     const token = useSelector((state) => state.UserReducer.idToken)
     const userId = useSelector((state) => state.UserReducer.userSession.id)
@@ -94,87 +92,6 @@ const NewChatroom = props => {
     );
 }
 
-const UserResult = (props) => {
-    const navigation = useNavigation();
-    const chats = useSelector((state) => state.ChatReducer.privateChats);
-    const userSessionName = useSelector((state) => state.UserReducer.userSession.name);
 
-    const handleSetChatroom = () => {
-        console.log(props.item);
-
-        // Check if the users have previously chatted
-        var chatroom = false;
-
-        chats.forEach(chat => {
-            chat.chatMessages.forEach(message => {
-                console.log(message);
-                console.log(props.id);
-                if(message.userFrom === props.id || message.userTo === props.id) {
-                    
-                    chatroom = chat;
-                    console.log(chatroom);
-                }
-            })
-        })
-
-        if(chatroom !== false) {
-            // If yes import chat room and navigate
-            console.log(chatroom);
-            chatroom = new ChatRoom(chatroom.id,
-                                    chatroom.createdDate,
-                                    chatroom.name,
-                                    chatroom.name_2,
-                                    chatroom.image,
-                                    chatroom.chatMessages,
-                                    chatroom.isPublicChat)
-            
-            navigation.navigate('ChatMessage', {item: chatroom});
-        
-        } else {
-            // If not create new empty room and navigate
-            chatroom = new ChatRoom(uuid(),
-                                    new Date().getTime(),
-                                    props.name,
-                                    userSessionName,
-                                    "http://thenewcode.com/assets/images/thumbnails/sarah-parmenter.jpeg",
-                                    [],
-                                    false);
-
-            navigation.navigate('ChatMessage', {item: chatroom, userTo: props.id, messages: []});
-        }
-        
-    
-        // navigation.navigate('ChatMessage', {item: props.item})} >
-
-    }
-
-    return (
-        <View>
-            <TouchableOpacity onPress={() => handleSetChatroom()}>
-                <Text> {props.name} </Text>
-            </TouchableOpacity>
-        </View>
-    )
-}
 
 export default NewChatroom;
-
-const getUsers = async (token) => {
-    const response = await fetch(
-        "https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=" +
-            token,
-        {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        }
-    );
-
-    if (!response.ok) {
-        throw new Error("Could not get user");
-    } else {
-        var users = await response.json();
-        return users;
-    }
-};

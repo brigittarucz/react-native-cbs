@@ -3,7 +3,7 @@ import 'react-native-gesture-handler';
 
 import { View, TouchableOpacity, FlatList } from 'react-native';
 
-import ChatRoom from '../../../components/ChatRoom/ChatRoom';
+import ChatRoom from './ChatRoom/ChatRoom';
 import { useNavigation } from '@react-navigation/native';
 
 const ChatEntry = props => {

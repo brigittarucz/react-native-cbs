@@ -7,7 +7,6 @@ import { SET_MESSAGES,
 const ChatReducer = (state = {messages: [], publicChats: [], privateChats: []}, action) => {
     switch(action.type) {
         case SET_MESSAGES: {
-            console.log(action.payload);
             return {
                 ...state,
                 messages: action.payload.messages
@@ -29,7 +28,7 @@ const ChatReducer = (state = {messages: [], publicChats: [], privateChats: []}, 
                 ...state,
             }
         case SET_UPDATE_CHATROOMS_PRIVATE: {
-        console.log(action.payload);
+        // console.log(action.payload);
             return {
                 ...state,
                 privateChats: action.payload

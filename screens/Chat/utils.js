@@ -1,4 +1,4 @@
-export default function getChatRooms(chatrooms, userPublic, userPrivate) {
+const getChatRooms = (chatrooms, userPublic, userPrivate) => {
     // Filter chatrooms by loggedInUerPrivate and loggedInUerPublic
     var loggedInUserChatRooms = chatrooms.filter(chatroom => (
         chatroom.name[0].id == userPublic.id ||
@@ -37,3 +37,28 @@ export default function getChatRooms(chatrooms, userPublic, userPrivate) {
 
     return loggedInUserChatRooms
 }
+
+
+const getUsers = async (token) => {
+    const response = await fetch(
+        "https://react-native-5adee-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=" +
+            token,
+        {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error("Could not get user");
+    } else {
+        var users = await response.json();
+        return users;
+    }
+};
+
+
+export {getChatRooms,
+        getUsers}

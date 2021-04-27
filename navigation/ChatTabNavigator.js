@@ -18,7 +18,6 @@ export default function ChatTabNavigator(props) {
     const publicChatRooms = useSelector((state) => state.ChatReducer.publicChats)
     const privateChatRooms = useSelector((state) => state.ChatReducer.privateChats)
 
-    console.log(props.route.params);
     return (
         <Tab.Navigator
             tabBarOptions={{

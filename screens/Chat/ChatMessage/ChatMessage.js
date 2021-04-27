@@ -4,19 +4,18 @@ import 'react-native-gesture-handler';
 import { View, FlatList, Text, TouchableOpacity } from 'react-native';
 import { useSelector, useDispatch } from "react-redux";
 
-import ChatTo from '../ChatIndividual/ChatTo/ChatTo';
-import ChatFrom from '../ChatIndividual/ChatFrom/ChatFrom';
+import ChatTo from './ChatTo/ChatTo';
+import ChatFrom from './ChatFrom/ChatFrom';
 import { useState, useEffect } from 'react';
 
 import chatActions from '../../../store/actions/ChatActions';
 import SendMessage from './SendMessage/SendMessage';
-import { chatRoomStyles } from '../../../components/ChatRoom/styles';
 
 
 const ChatMessage = props => {
     const dispatch = useDispatch();
 
-    console.log(props.route.params);
+    // console.log(props.route.params);
 
     var chatroom = props.route.params.item;
     var messages = chatroom.chatMessages;
@@ -38,8 +37,8 @@ const ChatMessage = props => {
     const newAddedMessage = (newMessage) => {
         newMessages.push(newMessage);
         setNewMessages(newMessages)
-        console.log(newMessages);
-        console.log("Add");
+        // console.log(newMessages);
+        // console.log("Add");
         setTriggerRerender(!triggerRerender);
     }
 
@@ -55,7 +54,7 @@ const ChatMessage = props => {
             .then(userTo => {
                 
                 // User from DB to add image 
-                console.log(chatroom.chatMessages);
+                // console.log(chatroom.chatMessages);
                 var flatlistGenerated = (
                     <FlatList 
                         data={messages}

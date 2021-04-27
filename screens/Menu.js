@@ -3,6 +3,7 @@ import { StyleSheet } from 'react-native';
 import ProfileStackNavigator from '../navigation/ProfileStackNavigator';
 
 const Menu = props => {
+    
     return (
         <ProfileStackNavigator />
     )
