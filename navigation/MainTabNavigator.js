@@ -28,7 +28,7 @@ export default function MainTabNavigator() {
         var tabs = (
             <>
                 <Tab.Screen name="Signup" component={Signup} />
-                <Tab.Screen name="Login" component={Login} />
+                <Tab.Screen name="Login" component={Home} />
             </>
         );
     } else {
