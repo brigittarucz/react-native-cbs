@@ -8,6 +8,18 @@ import { Provider } from 'react-redux';
 
 import MainTabNavigator from './navigation/MainTabNavigator';
 
+import { setCustomText } from 'react-native-global-props';
+import { Platform, Text } from "react-native";
+
+const customTextInputProps = {
+    underlineColorAndroid: 'rgba(0,0,0,0)',
+    style: {
+      fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto'
+    }
+};
+
+setCustomText(customTextInputProps)
+
 export default function App() {
 
   // Redux Store is not accessible here

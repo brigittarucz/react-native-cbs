@@ -1,5 +1,5 @@
 import React from 'React';
-import { View, Text, StyleSheet, ImageBackground, Image, Button, TouchableOpacity } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, ImageBackground, Image, Button, TouchableOpacity } from 'react-native';
 import { useSelector } from 'react-redux';
 import { 
     Ionicons, 
@@ -13,10 +13,12 @@ import {
     // console.log(events);
 
     return (
-        <View>
-            <Organization />
-            <Blog />
-            <Event />
+        <View style={{flex: 1}}>
+            <ScrollView>
+                <Organization />
+                <Blog />
+                <Event />
+            </ScrollView>
         </View>
     );
 }

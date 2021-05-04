@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Button, ActivityIndicator } from 'react-native';
+import { View, Image, Text, StyleSheet, Platform, ActivityIndicator } from 'react-native';
 
 import { useDispatch } from 'react-redux';
 import userActions from '../../../store/actions/UserActions';
@@ -7,6 +7,10 @@ import chatActions from '../../../store/actions/ChatActions';
 
 import Input from '../../../components/UI/Input';
 import eventActions from '../../../store/actions/EventActions';
+
+import CustomButton from '../../../components/UI/Button';
+
+import logo from '../../../assets/logo.png';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -51,32 +55,68 @@ const Login = () => {
     }
 
     return (
-        <View style={styles.container}>
-            <Input label="Email"
-            error="Please fill out your email" value={email}
-            text={email} nameValid={emailValid}
-            onValid={valid => setEmailValid(valid)}
-            setContent={content => setEmail(content)}/>
+        <View style={styles.mainContainer}>
+            <View style={{marginTop: 15, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <Image source={logo} style={{width: 140, height: 140}} />
+            </View>
+            <View style={styles.container}>
 
-            <Input label="Password"
-            error="Please fill out your password" value={password}
-            text={password} nameValid={passwordValid}
-            onValid={valid => setPasswordValid(valid)}
-            setContent={content => setPassword(content)}/>
+                <Text style={{color: 'rgb(50,48,93)', 
+                            fontSize: 22,
+                            fontWeight: 700,
+                            fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto'}}>Log In</Text>
 
-            <Button onPress={() => loginHandler()} title="Login!"/>
-            {displayStatus}
-            {isLoading && <ActivityIndicator size="large" color="#0000ff"  />}
+                <View style={{
+                    marginTop: 20,
+                    marginBottom: 20,
+                }}>
+
+                <Input label="Email"
+                error="Please fill out your email" value={email}
+                text={email} nameValid={emailValid}
+                onValid={valid => setEmailValid(valid)}
+                setContent={content => setEmail(content)}/>
+
+                <Input label="Password"
+                error="Please fill out your password" value={password}
+                text={password} nameValid={passwordValid}
+                onValid={valid => setPasswordValid(valid)}
+                setContent={content => setPassword(content)}/>
+
+                </View>
+
+               
+                <Text style={{color: 'rgb(80,80,165)', 
+                            fontSize: 14,
+                            textAlign: 'center',
+                            fontWeight: 700,
+                            fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto'}}>Forgot password?</Text>
+
+                <CustomButton onPress={() => loginHandler()} title="Log In" />
+
+                <Text style={{color: 'rgb(80,80,165)',
+                              textAlign: 'center'}}>
+                    <Text>Don't have an account? </Text>
+                    <Text style={{fontWeight: 700}}>Sign up</Text>
+                </Text>
+
+                {displayStatus}
+                {isLoading && <ActivityIndicator size="large" color="#0000ff"  />}
+            </View>
+
         </View>
     );
 }
 
 const styles = StyleSheet.create({
     container: {
-       flex: 1,
-       justifyContent: 'center',
-       alignItems: 'center'
-  },
+        margin: 15,
+    },
+    mainContainer: {
+        backgroundColor: 'white',
+        width: '100%',
+        height: '100%'
+    },
 });
 
 export default Login;

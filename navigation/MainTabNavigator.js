@@ -13,6 +13,8 @@ import Login from "../screens/Authentication/Login/Login";
 import Signup from "../screens/Authentication/Signup/Signup";
 import { useSelector } from "react-redux";
 
+
+
 export default function MainTabNavigator() {
     const Tab = createBottomTabNavigator();
     const isLoggedIn = useSelector((state) => state.UserReducer.isLoggedIn);
@@ -28,7 +30,7 @@ export default function MainTabNavigator() {
         var tabs = (
             <>
                 <Tab.Screen name="Signup" component={Signup} />
-                <Tab.Screen name="Login" component={Home} />
+                <Tab.Screen name="Login" component={Login} />
             </>
         );
     } else {
