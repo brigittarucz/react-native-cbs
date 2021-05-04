@@ -87,15 +87,46 @@ const Event = () => {
 
 const Blog = () => {
     return (
-        <View style={{margin: 20, marginBottom: 10}}>
-            <Image source={{uri: "https://i.pinimg.com/originals/00/6f/e7/006fe7f785c991102866b859a4b6be7e.jpg"}} />
-            <Image source={{uri: "https://cdn.britannica.com/19/1919-050-E3CBE7A5/Oliver-Creole-Jazz-Band-Chicago-1923.jpg"}} />
-            <TouchableOpacity style={{flexDirection:'row', flexWrap:'wrap', alignItems: 'center'}}>
-                <AntDesign name="check" />
-                <Text>Following</Text>
-            </TouchableOpacity>
-            <Text>CBS Jam</Text>
-            <Text>Description of the organization. Something which can be expanded if the user whishes to see more of it. This is just a snippet of the text.</Text>
+        <View style={{margin: 20, marginBottom: 10, backgroundColor: 'white', borderRadius: 15}}>
+            <Image style={{borderTopLeftRadius: 15, borderTopRightRadius: 15, width: '100%', height: 150}} source={{uri: "https://cdn.britannica.com/19/1919-050-E3CBE7A5/Oliver-Creole-Jazz-Band-Chicago-1923.jpg"}} />
+            <View style={{padding: 10}}>
+                <View style={{width: 110, height: 110, borderRadius: 10, shadowColor: "#000",
+                    shadowOffset: {
+                        width: 0,
+                        height: 4,
+                    },
+                    shadowOpacity: 0.32,
+                    shadowRadius: 5.46,
+
+                    elevation: 9,
+                    marginTop: -65,
+                    marginLeft: 10 }}>
+                <Image style={{width: 110, 
+                               height: 110, 
+                               borderRadius: 10, 
+                               borderWidth: 5, 
+                               borderColor: 'white',
+                               }} source={{uri: "https://i.pinimg.com/originals/00/6f/e7/006fe7f785c991102866b859a4b6be7e.jpg"}} />
+                </View>
+                <TouchableOpacity style={{shadowColor: "#000",
+                                        shadowOffset: {
+                                            width: 0,
+                                            height: 1,
+                                        },
+                                        shadowOpacity: 0.22,
+                                        shadowRadius: 2.22, 
+                                        backgroundColor: 'white',
+                                        padding: 7,
+                                        elevation: 8, borderRadius: 5, borderWidth: 1,
+                                        width: 150, borderColor: "rgb(80,80,165)", flexDirection:'row', 
+                                        flexWrap:'wrap', alignItems: 'center', justifyContent: 'center',
+                                        left: 150, top: -35}}>
+                    <AntDesign name="check" style={{color: "rgb(80,80,165)", fontSize: 18, fontWeight: 900, marginRight: 5}}/>
+                    <Text style={{color: "rgb(80,80,165)", fontSize: 17, fontWeight: 700}}>Following</Text>
+                </TouchableOpacity>
+                <Text style={{fontWeight: 700, fontSize: 18, paddingLeft: 10, marginTop: -20}}>CBS Jam</Text>
+                <Text style={{fontSize: 16, padding: 10}}>Description of the organization. Something which can be expanded if the user whishes to see more of it. This is just a snippet of the text.</Text>
+            </View>
         </View>
     )
 }
