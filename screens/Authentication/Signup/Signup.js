@@ -1,11 +1,13 @@
 import React from 'react';
 import { useState } from 'react';
-import { View, Text, Button, StyleSheet, ActivityIndicator } from 'react-native';
+import { View, Text, Platform, StyleSheet, ActivityIndicator, Image } from 'react-native';
 import { useDispatch } from 'react-redux';
 import Input from '../../../components/UI/Input';
 import userActions from '../../../store/actions/UserActions';
 import eventActions from '../../../store/actions/EventActions';
 
+import logo from '../../../assets/logo.png';
+import CustomButton from '../../../components/UI/Button';
 
 const Signup = () => {
    const dispatch = useDispatch();
@@ -36,6 +38,19 @@ const Signup = () => {
 
    return (
       <View style={styles.container}>
+         <View style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+                <Image source={logo} style={{width: 140, height: 140}} />
+         </View>
+
+         <Text style={{color: 'rgb(50,48,93)', 
+                            fontSize: 22,
+                            fontWeight: 700,
+                            fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto'}}>Sign up to get access</Text>
+
+         <View style={{
+                    marginTop: 20,
+                    marginBottom: 20,
+                }}>
          <Input label="Name"
             error="Please fill out your name"
             text={name} nameValid={nameValid}
@@ -59,19 +74,27 @@ const Signup = () => {
             text={passwordRepeat} nameValid={passwordRepeatValid}
             onValid={valid => setPasswordRepeatValid(valid)}
             setContent={content => setPasswordRepeat(content)}/>
-
+         </View>
+         
          {displayStatus}
+         <CustomButton onPress={() => handleSignup()} title="Get access" />
 
-         <Button title="Signup" onPress={handleSignup}/>
+         <Text style={{color: 'rgb(80,80,165)',
+                              textAlign: 'center'}}>
+                    <Text>Already have a user?</Text>
+                    <Text style={{fontWeight: 700}}>Log in</Text>
+         </Text>
+
       </View>
    );
 }
 
 const styles = StyleSheet.create({
    container: {
-      flex: 1,
-      justifyContent: 'center',
-      alignItems: 'center'
+     backgroundColor: 'white',
+     width: '100%',
+     height: '100%',
+     padding: 15
  },
 });
  

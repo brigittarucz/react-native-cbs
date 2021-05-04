@@ -18,7 +18,7 @@ import { useSelector } from "react-redux";
 export default function MainTabNavigator() {
     const Tab = createBottomTabNavigator();
     const isLoggedIn = useSelector((state) => state.UserReducer.isLoggedIn);
-    const [route, setRoute] = useState("Login");
+    const [route, setRoute] = useState("Signup");
 
     useEffect(() => {
         if (isLoggedIn) {
