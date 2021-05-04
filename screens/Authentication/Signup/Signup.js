@@ -23,7 +23,7 @@ const Signup = () => {
 
    const handleSignup = () => {
       if(password === passwordRepeat) {
-         setDisplayStatus(<ActivityIndicator size="large" color="#0000ff"/>)
+         setDisplayStatus(<ActivityIndicator size="large" color="rgb(80,80,165)"/>)
          dispatch(userActions.signUserUp(name, email, password))
             .then(() => {
                dispatch(eventActions.setUserEvents())
@@ -48,8 +48,8 @@ const Signup = () => {
                             fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto'}}>Sign up to get access</Text>
 
          <View style={{
-                    marginTop: 20,
-                    marginBottom: 20,
+                    marginTop: 15,
+                    marginBottom: 10,
                 }}>
          <Input label="Name"
             error="Please fill out your name"
@@ -77,11 +77,12 @@ const Signup = () => {
          </View>
          
          {displayStatus}
+         
          <CustomButton onPress={() => handleSignup()} title="Get access" />
 
          <Text style={{color: 'rgb(80,80,165)',
                               textAlign: 'center'}}>
-                    <Text>Already have a user?</Text>
+                    <Text>Already have a user? </Text>
                     <Text style={{fontWeight: 700}}>Log in</Text>
          </Text>
 

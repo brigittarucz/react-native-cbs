@@ -1,13 +1,15 @@
 import "react-native-gesture-handler";
 import React, { useEffect, useState } from "react";
+import { Platform } from 'react-native';
 
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 
-import Home from "../screens/Home";
 import ChatStackNavigator from "../navigation/ChatStackNavigator";
-import Discover from "../screens/Discover";
+import HomeStackNavigator from "../navigation/HomeStackNavigator";
+import DiscoverStackNavigator from '../navigation/DiscoverStackNavigator';
+
 import Menu from "../screens/Menu/Menu";
 import Login from "../screens/Authentication/Login/Login";
 import Signup from "../screens/Authentication/Signup/Signup";
@@ -18,7 +20,7 @@ import { useSelector } from "react-redux";
 export default function MainTabNavigator() {
     const Tab = createBottomTabNavigator();
     const isLoggedIn = useSelector((state) => state.UserReducer.isLoggedIn);
-    const [route, setRoute] = useState("Signup");
+    const [route, setRoute] = useState("Login");
 
     useEffect(() => {
         if (isLoggedIn) {
@@ -29,8 +31,28 @@ export default function MainTabNavigator() {
     if (!isLoggedIn) {
         var tabs = (
             <>
-                <Tab.Screen name="Signup" component={Signup} />
-                <Tab.Screen name="Login" component={Login} />
+                <Tab.Screen name="Signup" 
+                            component={Signup}
+                            options={() => ({
+                                tabBarIcon: () => (
+                                    <MaterialCommunityIcons
+                                        name="account-box-multiple-outline"
+                                        color="#5050A5"
+                                        size="32px"
+                                    />
+                                ),
+                            })} />
+                <Tab.Screen name="Login" 
+                            component={DiscoverStackNavigator}
+                            options={() => ({
+                                tabBarIcon: () => (
+                                    <MaterialCommunityIcons
+                                        name="account-arrow-right-outline"
+                                        color="#5050A5"
+                                        size="32px"
+                                    />
+                                ),
+                            })} />
             </>
         );
     } else {
@@ -38,7 +60,7 @@ export default function MainTabNavigator() {
             <>
                 <Tab.Screen
                     name="Home"
-                    component={Home}
+                    component={HomeStackNavigator}
                     options={() => ({
                         tabBarIcon: () => (
                             <MaterialCommunityIcons
@@ -51,7 +73,7 @@ export default function MainTabNavigator() {
                 />
                 <Tab.Screen
                     name="Discover"
-                    component={Discover}
+                    component={DiscoverStackNavigator}
                     options={() => ({
                         tabBarIcon: () => (
                             <MaterialCommunityIcons
@@ -102,6 +124,8 @@ export default function MainTabNavigator() {
                     labelStyle: {
                         fontSize: 12,
                         marginBottom: 5,
+                        fontWeight: 500,
+                        fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto'
                     },
                     style: {
                         height: 60,

@@ -1,6 +1,6 @@
 import React from 'React';
 import { View, ScrollView, Text, StyleSheet, ImageBackground, Image, Button, TouchableOpacity } from 'react-native';
-import { useSelector } from 'react-redux';
+
 import { 
     Ionicons, 
     AntDesign,
@@ -25,7 +25,7 @@ import {
 
 const Organization = () => {
     return (
-        <View style={{margin: 20, marginBottom: 10}}>
+        <View style={{margin: 20, marginBottom: 10, borderWidth: 1, borderColor: 'rgb(221,221,221)', borderRadius: 15 }}>
             <ImageBackground style={{ borderRadius: 15 }} imageStyle={{borderRadius: 15, overflow: 'hidden'}} source={{uri: "https://images-na.ssl-images-amazon.com/images/S/sgp-catalog-images/region_US/lt5wv-MDAZM7NW98P-Full-Image_GalleryBackground-en-US-1601076926833._SX1080_.jpg"}} style={{}} >
             <LinearGradient
             // Background Linear Gradient
@@ -51,7 +51,7 @@ const Organization = () => {
 
 const Event = () => {
     return (
-        <View style={{margin: 20, marginBottom: 10, backgroundColor: 'white', borderRadius: 15, padding: 10}}>
+        <View style={{margin: 20, marginBottom: 10, borderWidth: 1, borderColor: 'rgb(221,221,221)', backgroundColor: 'white', borderRadius: 15, padding: 10}}>
              <View style={{flexDirection:'row', flexWrap:'wrap', alignItems: 'center'}}>
                 <Ionicons name="md-document-text" style={{color: "rgb(80,80,165)", fontSize: 16, marginRight: 5}} />
                 <Text style={{color: "rgb(80,80,165)", fontWeight: 700}}>BLOG</Text>
@@ -89,7 +89,7 @@ const Event = () => {
 
 const Blog = () => {
     return (
-        <View style={{margin: 20, marginBottom: 10, backgroundColor: 'white', borderRadius: 15}}>
+        <View style={{margin: 20, marginBottom: 10, backgroundColor: 'white', borderRadius: 15, borderWidth: 1, borderColor: 'rgb(221,221,221)'}}>
             <Image style={{borderTopLeftRadius: 15, borderTopRightRadius: 15, width: '100%', height: 150}} source={{uri: "https://cdn.britannica.com/19/1919-050-E3CBE7A5/Oliver-Creole-Jazz-Band-Chicago-1923.jpg"}} />
             <View style={{padding: 10}}>
                 <View style={{width: 110, height: 110, borderRadius: 10, shadowColor: "#000",

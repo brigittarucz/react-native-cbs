@@ -92,6 +92,8 @@ const Login = () => {
                             fontWeight: 700,
                             fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto'}}>Forgot password?</Text>
 
+                {isLoading && <ActivityIndicator size="large" style={{marginTop: 15}} color="rgb(80,80,165)"  />}
+                
                 <CustomButton onPress={() => loginHandler()} title="Log In" />
 
                 <Text style={{color: 'rgb(80,80,165)',
@@ -100,8 +102,6 @@ const Login = () => {
                     <Text style={{fontWeight: 700}}>Sign up</Text>
                 </Text>
 
-                {displayStatus}
-                {isLoading && <ActivityIndicator size="large" color="#0000ff"  />}
             </View>
 
         </View>
