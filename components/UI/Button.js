@@ -6,7 +6,7 @@ const CustomButton = (props) => {
     return (
         <TouchableOpacity style={{
                 backgroundColor: props.btnBgColor === 'white' ? 'white' : 'rgb(80,80,165)', 
-                padding: 15,
+                padding: 12,
                 borderRadius: 5,
                 marginTop: 25,
                 marginBottom: 25,
@@ -23,7 +23,7 @@ const CustomButton = (props) => {
             }} onPress={props.onPress}>
                 <Text style={{ 
                 color: props.btnBgColor === 'white' ? '#32305D' : 'white',
-                fontSize: 18,
+                fontSize: 16,
                 fontWeight: 700,}}>{props.title}</Text>
         </TouchableOpacity>
     )

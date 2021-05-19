@@ -15,8 +15,6 @@ import Login from "../screens/Authentication/Login/Login";
 import Signup from "../screens/Authentication/Signup/Signup";
 import { useSelector } from "react-redux";
 
-import Profile from "../screens/Menu/Profile/Profile";
-
 export default function MainTabNavigator() {
     const Tab = createBottomTabNavigator();
     const isLoggedIn = useSelector((state) => state.UserReducer.isLoggedIn);
