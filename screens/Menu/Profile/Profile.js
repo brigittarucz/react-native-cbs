@@ -14,18 +14,13 @@ const Profile = props => {
 
     return (
         <View style={profileStyles.container}>
-            {/* <Image source={{
-                    uri: loggedInUser.image,
-            }} />
-            <Text>{loggedInUser.name}</Text>
-            <Text>{loggedInUser.email}</Text>
-            <Text>{loggedInUser.title}</Text> */}
+
             <View style={profileStyles.userContainer}>
-                <Image style={profileStyles.userImage} source={{uri: "http://thenewcode.com/assets/images/thumbnails/sarah-parmenter.jpeg"}} />
+                <Image style={profileStyles.userImage} source={{uri: loggedInUser.image}} />
                 <View style={profileStyles.userBio}>
-                    <Text style={profileStyles.userName}>User name</Text>
-                    <Text style={profileStyles.userEmail}>User email</Text>
-                    <Text style={profileStyles.userTitle}>User title</Text>
+                    <Text style={profileStyles.userName}>{loggedInUser.name}</Text>
+                    <Text style={profileStyles.userEmail}>{loggedInUser.email}</Text>
+                    <Text style={profileStyles.userTitle}>{loggedInUser.title}</Text>
                 </View>     
             </View>
             <CustomButton btnTextType="center" title="Edit Profile" onPress={() => navigation.navigate("Edit Profile")}/>
@@ -34,15 +29,15 @@ const Profile = props => {
                 <Text style={profileStyles.notificationsTitle}>Notifications</Text>
                 <View style={profileStyles.notificationContainer}>
                     <View>
-                        <Text>Chat</Text>
-                        <Text>When you receive a new message</Text>
+                        <Text style={profileStyles.notificationTitle}>Chat</Text>
+                        <Text style={profileStyles.notificationDesc}>When you receive a new message</Text>
                     </View>
                     <CustomSwitch />
                 </View>
                 <View style={profileStyles.notificationContainer}>
                     <View>
-                        <Text>Event reminder</Text>
-                        <Text>An hour before events you are going to</Text>
+                        <Text style={profileStyles.notificationTitle}>Event reminder</Text>
+                        <Text style={profileStyles.notificationDesc}>An hour before events you are going to</Text>
                     </View>
                     <CustomSwitch />
                 </View>
@@ -67,6 +62,20 @@ const profileStyles = StyleSheet.create({
         shadowRadius: 2.22,
 
         elevation: 3,
+        padding: 10,
+        borderRadius: 5,
+        display: 'flex', 
+        alignItems: 'center', 
+        flexDirection: 'row',
+        justifyContent: 'space-between'
+    },
+    notificationTitle: {
+        fontSize: 16,
+        fontWeight: 600
+    },
+    notificationDesc: {
+        fontSize: 14,
+        color: "#404040"
     },
     container: {
         margin: 20

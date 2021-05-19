@@ -14,12 +14,15 @@ const CustomSwitch = (props) => {
             ios_backgroundColor="#5050A5"
             onValueChange={toggleSwitch}
             value={isEnabled}
+            style={styles.switch}
         />
     )
 }
 
 const styles = StyleSheet.create({
-
+    switch: {
+        marginRight: 10
+    }
 });
 
 export default CustomSwitch;

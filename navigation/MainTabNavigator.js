@@ -43,7 +43,7 @@ export default function MainTabNavigator() {
                                 ),
                             })} />
                 <Tab.Screen name="Login" 
-                            component={Profile}
+                            component={Login}
                             options={() => ({
                                 tabBarIcon: () => (
                                     <MaterialCommunityIcons
