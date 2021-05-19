@@ -1,15 +1,19 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, Platform } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
 import CustomButton from '../../../components/UI/Button';
 import CustomSwitch from '../../../components/UI/Switch';
 
+import userActions from '../../../store/actions/UserActions';
+
 const Profile = props => {
+    const dispatch = useDispatch();
     const navigation = useNavigation();
     const loggedInUser = props.loggedInUser;
 
     const handleLogout = () => {
-        console.log(Logout)
+        dispatch(userActions.logUserOut());
     }
 
     return (
