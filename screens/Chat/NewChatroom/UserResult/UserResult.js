@@ -2,7 +2,7 @@
 import React from "react";
 // REACT NATIVE
 import 'react-native-gesture-handler';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, Platform } from 'react-native';
 // REDUX
 import { useSelector } from 'react-redux';
 // NAVIGATION
@@ -69,10 +69,39 @@ const UserResult = (props) => {
     return (
         <View>
             <TouchableOpacity onPress={() => handleSetChatroom()}>
-                <Text> {props.name} </Text>
+                <View>
+                    <View style={chatSearchStyles.start}>
+                        <Image style={chatSearchStyles.startImage} source='https://randomuser.me/api/portraits/women/0.jpg' />
+                        <Text style={chatSearchStyles.text}>{props.name}</Text>
+                    </View>
+                </View>
             </TouchableOpacity>
         </View>
     )
 }
+
+const chatSearchStyles = StyleSheet.create({
+    start: {
+        marginTop: 5,
+        marginBottom: 5,
+        height: 80, 
+        width: '100%',
+        display: 'flex',
+        alignItems: 'center',
+        flexDirection: 'row'
+    },
+    startImage: {
+        width: 40, 
+        height: 40,
+        borderRadius: 40,
+        borderWidth: 1,
+        borderColor: '#eee',
+        margin: 20
+    },
+    text: {
+        fontWeight: 600,
+        fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto'
+    }
+})
 
 export default UserResult;

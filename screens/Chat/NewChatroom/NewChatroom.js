@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 // REACT NATIVE
 import 'react-native-gesture-handler';
-import { View, Text, Button, FlatList} from 'react-native';
+import { View, Text, FlatList } from 'react-native';
 // REDUX
 import { useSelector } from 'react-redux';
 // COMPONENTS
@@ -10,6 +10,7 @@ import Input from '../../../components/UI/Input';
 // MODELS
 import UserResult from './UserResult/UserResult';
 import PrivateUser from '../../../models/PrivateUser';
+import CustomButton from '../../../components/UI/Button';
 // OTHERS
 import { getUsers } from '../utils';
 
@@ -84,15 +85,17 @@ const NewChatroom = () => {
     }
 
     return (
-        <View>
-            <Input label="Search user"
-                error="Please fill at least 3 characters"
-                text={userSearch} nameValid={userSearchValid}
-                onValid={valid => setUserSearchValid(valid)}
-                setContent={content => setUserSearch(content)}/>
-            <Button title="Search user" onPress={() => handleSearchUser()}/>
+        <View style={{height: '100%', width: '100%', backgroundColor: "#F5F5F5"}}>
+            <View style={{margin: 20}}>
+                <Input label="Search user"
+                    error="Please fill at least 3 characters"
+                    text={userSearch} nameValid={userSearchValid}
+                    onValid={valid => setUserSearchValid(valid)}
+                    setContent={content => setUserSearch(content)}/>
+                <CustomButton title="Search user" onPress={() => handleSearchUser()}/>
 
-            {searchResult}
+                {searchResult}
+            </View>
         </View>
     );
 }

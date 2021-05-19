@@ -16,7 +16,6 @@ import Signup from "../screens/Authentication/Signup/Signup";
 import { useSelector } from "react-redux";
 
 
-
 export default function MainTabNavigator() {
     const Tab = createBottomTabNavigator();
     const isLoggedIn = useSelector((state) => state.UserReducer.isLoggedIn);
@@ -43,7 +42,7 @@ export default function MainTabNavigator() {
                                 ),
                             })} />
                 <Tab.Screen name="Login" 
-                            component={DiscoverStackNavigator}
+                            component={Login}
                             options={() => ({
                                 tabBarIcon: () => (
                                     <MaterialCommunityIcons

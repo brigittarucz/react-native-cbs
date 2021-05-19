@@ -18,7 +18,7 @@ export default function ChatStackNavigator() {
     const navigation = useNavigation();
 
     var stackNewOptions = {
-        headerTitle: "Chat",
+        headerTitle: "SEARCH",
         headerTintColor: "#5050A5",
         headerTitleAlign: 'center',
         headerTitleStyle: {

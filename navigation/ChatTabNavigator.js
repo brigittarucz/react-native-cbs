@@ -32,7 +32,7 @@ export default function ChatTabNavigator(props) {
                 children={() => <ChatEntry chatrooms={publicChatRooms} />}
                 />           
             <Tab.Screen 
-                name={loggedInUser.email} 
+                name={loggedInUser.name} 
                 children={() => <ChatEntry chatrooms={privateChatRooms} />} 
                 />  
         </Tab.Navigator>
