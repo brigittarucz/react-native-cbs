@@ -15,6 +15,7 @@ import Login from "../screens/Authentication/Login/Login";
 import Signup from "../screens/Authentication/Signup/Signup";
 import { useSelector } from "react-redux";
 
+import Profile from "../screens/Menu/Profile/Profile";
 
 export default function MainTabNavigator() {
     const Tab = createBottomTabNavigator();
@@ -42,7 +43,7 @@ export default function MainTabNavigator() {
                                 ),
                             })} />
                 <Tab.Screen name="Login" 
-                            component={Login}
+                            component={Profile}
                             options={() => ({
                                 tabBarIcon: () => (
                                     <MaterialCommunityIcons
