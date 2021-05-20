@@ -2,7 +2,7 @@
 import React from "react";
 // REACT NATIVE
 import 'react-native-gesture-handler';
-import { View, Text, TouchableOpacity, StyleSheet, Image, Platform } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 // REDUX
 import { useSelector } from 'react-redux';
 // NAVIGATION
@@ -11,6 +11,7 @@ import { useNavigation } from '@react-navigation/native';
 import ChatRoom from '../../../../models/ChatRoom';
 // OTHERS
 import { uuid } from 'uuidv4';
+import { chatSearchStyles } from './styles';
 
 const UserResult = (props) => {
     const navigation = useNavigation();
@@ -80,28 +81,5 @@ const UserResult = (props) => {
     )
 }
 
-const chatSearchStyles = StyleSheet.create({
-    start: {
-        marginTop: 5,
-        marginBottom: 5,
-        height: 80, 
-        width: '100%',
-        display: 'flex',
-        alignItems: 'center',
-        flexDirection: 'row'
-    },
-    startImage: {
-        width: 40, 
-        height: 40,
-        borderRadius: 40,
-        borderWidth: 1,
-        borderColor: '#eee',
-        margin: 20
-    },
-    text: {
-        fontWeight: 600,
-        fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto'
-    }
-})
 
 export default UserResult;
