@@ -8,8 +8,8 @@ import { useSelector, useDispatch } from "react-redux";
 import chatActions from '../../../store/actions/ChatActions';
 // COMPONENTS
 import SendMessage from './SendMessage/SendMessage';
-import ChatTo from './ChatTo/ChatTo';
-import ChatFrom from './ChatFrom/ChatFrom';
+import ChatTo from './ChatTo/ChatTo.tsx';
+import ChatFrom from './ChatFrom/ChatFrom.tsx';
 // OTHERS
 import { getUser } from '../utils';
 

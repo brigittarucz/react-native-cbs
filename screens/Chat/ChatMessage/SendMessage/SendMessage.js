@@ -9,7 +9,7 @@ import chatActions from '../../../../store/actions/ChatActions';
 // NAVIGATION
 import { useNavigation } from '@react-navigation/native';
 // MODELS
-import ChatMessage from '../../../../models/ChatMessage';
+import ChatMessage from '../../../../models/ChatMessage.tsx';
 // OTHERS
 import { chatStartStyles } from './styles';
 import { uuid } from 'uuidv4';

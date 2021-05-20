@@ -6,7 +6,14 @@ import { View, Text, Image } from 'react-native';
 // OTHERS
 import { chatFromStyles } from './styles';
 
-const ChatFrom = (props) => {
+import { default as ChatMessageInterface } from '../../../../models/ChatMessage';
+
+interface ChatFromProps {
+    data: ChatMessageInterface
+}
+
+const ChatFrom: React.FC<ChatFromProps> = (props): JSX.Element => {
+    console.log(props)
     return (
             <View style={chatFromStyles.from}>
                     <View style={chatFromStyles.fromContainer}>

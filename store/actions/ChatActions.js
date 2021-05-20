@@ -5,7 +5,7 @@ import { SET_MESSAGES,
          SET_UPDATE_CHATROOMS_PRIVATE } from '../constants/ConstantsActions';
 
 import ChatRoom from '../../models/ChatRoom.tsx';
-import ChatMessage from '../../models/ChatMessage';
+import ChatMessage from '../../models/ChatMessage.tsx';
 
 const setMessages = (messages) => {
     return {
