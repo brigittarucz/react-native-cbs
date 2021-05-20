@@ -5,7 +5,7 @@ import { SET_USER_SESSION,
          SIGN_USER_UP, 
          CHANGE_PASSWORD } from '../constants/ConstantsActions';
 
-import PrivateUser from '../../models/PrivateUser';
+import PrivateUser from '../../models/PrivateUser.tsx';
 
 const logUserIn = (email, password) => {
 
@@ -62,7 +62,7 @@ const logUserIn = (email, password) => {
                                                    users[key].title,
                                                    users[key].chatNotification,
                                                    users[key].additionalPublicIdentity)
-                        
+                        console.log(user);
                         dispatch({type: LOG_USER_IN, payload: {user: user, idToken: data.idToken } });
                         
                         // Because of redux thunk we can return:

@@ -20,7 +20,9 @@ const customTextInputProps = {
 
 setCustomText(customTextInputProps)
 
-export default function App() {
+// App is an arrow function whose type is FC (functional component) 
+// App returns JSX through :TypeAnnotation
+const App: React.FC = () : JSX.Element => {
 
   // Redux Store is not accessible here
 
@@ -39,3 +41,5 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 });
+
+export default App;

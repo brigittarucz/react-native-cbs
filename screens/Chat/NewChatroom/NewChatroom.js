@@ -9,7 +9,7 @@ import { useSelector } from 'react-redux';
 import Input from '../../../components/UI/Input';
 // MODELS
 import UserResult from './UserResult/UserResult';
-import PrivateUser from '../../../models/PrivateUser';
+import PrivateUser from '../../../models/PrivateUser.tsx';
 import CustomButton from '../../../components/UI/Button';
 // OTHERS
 import { getUsers } from '../utils';
