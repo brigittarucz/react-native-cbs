@@ -8,8 +8,4 @@ const Menu = () => {
     )
 }
 
-const styles = StyleSheet.create({
-
-});
-
 export default Menu;
