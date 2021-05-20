@@ -3,7 +3,7 @@ import {SET_EVENTS} from '../constants/ConstantsActions';
 // Report Ideas : store structure, project architecture considerations
 // how models influenced the DB, NoSQL based model architecture
 
-import Event from '../../models/Event';
+import Event from '../../models/Event.tsx';
 
 const setUserEvents = () => {
 

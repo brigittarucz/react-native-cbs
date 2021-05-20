@@ -10,6 +10,8 @@ interface ChatRoomInterface {
     lastMessageDate: number;
 }
 
+export type { ChatRoomInterface };
+
 class ChatRoom implements ChatRoomInterface  {
     id: string;
     createdDate: number;
@@ -20,7 +22,7 @@ class ChatRoom implements ChatRoomInterface  {
     isPublicChat: boolean;
     lastMessage: string;
     lastMessageDate: number;
-    
+
     constructor(id: string, 
                 createdDate: number, 
                 name: string, 
