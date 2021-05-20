@@ -6,7 +6,7 @@ import { View, TouchableOpacity, FlatList } from 'react-native';
 // NAVIGATION
 import { useNavigation } from '@react-navigation/native';
 // COMPONENTS
-import ChatRoom from './ChatRoom/ChatRoom';
+import ChatRoom from './ChatRoom/ChatRoom.tsx';
 
 const ChatEntry = props => {
     const navigation = useNavigation();

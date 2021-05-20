@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 // NAVIGATION
 import { useNavigation } from '@react-navigation/native';
 // COMPONENTS
-import ChatRoom from '../../../../models/ChatRoom';
+import ChatRoom from '../../../../models/ChatRoom.tsx';
 // OTHERS
 import { uuid } from 'uuidv4';
 import { chatSearchStyles } from './styles';
