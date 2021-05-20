@@ -4,7 +4,7 @@ import { Platform } from 'react-native';
 import 'react-native-gesture-handler';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import Discover from '../screens/Discover';
+import Discover from '../screens/Discover/Discover';
 
 export default function HomeStackNavigator() {
     const Stack = createStackNavigator();
