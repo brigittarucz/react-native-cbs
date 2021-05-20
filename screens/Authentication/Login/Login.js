@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Image, Text, StyleSheet, Platform, ActivityIndicator } from 'react-native';
+import { View, Image, Text, ActivityIndicator } from 'react-native';
 
 import { useDispatch } from 'react-redux';
 import userActions from '../../../store/actions/UserActions';
@@ -11,6 +11,7 @@ import eventActions from '../../../store/actions/EventActions';
 import CustomButton from '../../../components/UI/Button';
 
 import logo from '../../../assets/logo.png';
+import { loginStyles } from './styles';
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -55,21 +56,15 @@ const Login = () => {
     }
 
     return (
-        <View style={styles.mainContainer}>
-            <View style={{marginTop: 15, display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+        <View style={loginStyles.mainContainer}>
+            <View style={loginStyles.logoContainer}>
                 <Image source={logo} style={{width: 140, height: 140}} />
             </View>
-            <View style={styles.container}>
+            <View style={loginStyles.container}>
 
-                <Text style={{color: 'rgb(50,48,93)', 
-                            fontSize: 22,
-                            fontWeight: 700,
-                            fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto'}}>Log In</Text>
+                <Text style={loginStyles.title}>Log In</Text>
 
-                <View style={{
-                    marginTop: 20,
-                    marginBottom: 20,
-                }}>
+                <View style={loginStyles.margin}>
 
                 <Input label="Email"
                 error="Please fill out your email" value={email}
@@ -86,18 +81,13 @@ const Login = () => {
                 </View>
 
                
-                <Text style={{color: 'rgb(80,80,165)', 
-                            fontSize: 14,
-                            textAlign: 'center',
-                            fontWeight: 700,
-                            fontFamily: Platform.OS === 'ios' ? 'HelveticaNeue' : 'Roboto'}}>Forgot password?</Text>
+                <Text style={loginStyles.forgotPasswordText}>Forgot password?</Text>
 
                 {isLoading && <ActivityIndicator size="large" style={{marginTop: 15}} color="rgb(80,80,165)"  />}
                 
                 <CustomButton onPress={() => loginHandler()} title="Log In" />
 
-                <Text style={{color: 'rgb(80,80,165)',
-                              textAlign: 'center'}}>
+                <Text style={loginStyles.noAccountText}>
                     <Text>Don't have an account? </Text>
                     <Text style={{fontWeight: 700}}>Sign up</Text>
                 </Text>
@@ -108,15 +98,6 @@ const Login = () => {
     );
 }
 
-const styles = StyleSheet.create({
-    container: {
-        margin: 15,
-    },
-    mainContainer: {
-        backgroundColor: 'white',
-        width: '100%',
-        height: '100%'
-    },
-});
+
 
 export default Login;

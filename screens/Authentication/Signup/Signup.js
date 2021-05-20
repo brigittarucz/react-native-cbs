@@ -9,6 +9,8 @@ import eventActions from '../../../store/actions/EventActions';
 import logo from '../../../assets/logo.png';
 import CustomButton from '../../../components/UI/Button';
 
+import { signupStyles } from './styles';
+
 const Signup = () => {
    const dispatch = useDispatch();
    const [email, setEmail] = useState('');
@@ -37,8 +39,8 @@ const Signup = () => {
    };
 
    return (
-      <View style={styles.container}>
-         <View style={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
+      <View style={signupStyles.container}>
+         <View style={signupStyles.logoContainer}>
                 <Image source={logo} style={{width: 140, height: 140}} />
          </View>
 
@@ -80,8 +82,7 @@ const Signup = () => {
          
          <CustomButton onPress={() => handleSignup()} title="Get access" />
 
-         <Text style={{color: 'rgb(80,80,165)',
-                              textAlign: 'center'}}>
+         <Text style={signupStyles.alreadyUserText}>
                     <Text>Already have a user? </Text>
                     <Text style={{fontWeight: 700}}>Log in</Text>
          </Text>
@@ -90,13 +91,4 @@ const Signup = () => {
    );
 }
 
-const styles = StyleSheet.create({
-   container: {
-     backgroundColor: 'white',
-     width: '100%',
-     height: '100%',
-     padding: 15
- },
-});
- 
 export default Signup;
