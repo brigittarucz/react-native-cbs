@@ -1,0 +1,180 @@
+{
+  "chatrooms" : {
+    "ew8jka718" : {
+      "createdDate" : 1619189519244,
+      "image" : "https://media.wired.com/photos/5b512369f9e98c0b2b962645/master/pass/Jodie2.jpg",
+      "isPublicChat" : false,
+      "names" : {
+        "name_1" : "Jeremy",
+        "name_2" : "Marco"
+      }
+    },
+    "fioaenu293" : {
+      "createdDate" : 1619189519244,
+      "image" : "https://images.squarespace-cdn.com/content/v1/5ac621c3a9e0286371486130/1583852107583-R46KVCQNC1JI9BZ402SQ/ke17ZwdGBToddI8pDm48kDtTx1LlPk5SBKUcWqeR7ZJZw-zPPgdn4jUwVcJE1ZvWEtT5uBSRWt4vQZAgTJucoTqqXjS3CfNDSuuf31e0tVHL5HH9wretojISqrQuMTHEbaDbh9TdKFrlV9FpoejYgHXwRKnkxJsTvdk5FIL-keU/111_logo.+new.jpg?format=1000w",
+      "isPublicChat" : true,
+      "name" : "CBS Surf",
+      "names" : {
+        "name_1" : "CBS Surf",
+        "name_2" : false
+      }
+    },
+    "kjfn18njsdlk" : {
+      "createdDate" : 1619189729281,
+      "image" : "https://cache.nichehuset.dk/annoncer/jobannoncer/images/annoncoerer/logoer/4059/3853.png",
+      "isPublicChat" : true,
+      "name" : "CBS Students",
+      "names" : {
+        "name_1" : "CBS Students",
+        "name_2" : false
+      }
+    },
+    "ofnawoi9183" : {
+      "createdDate" : 1619189637745,
+      "image" : "https://images.squarespace-cdn.com/content/5ac621c3a9e0286371486130/1533580616892-VMYBZPR6G00SSZT2273C/32_logo.png?content-type=image%2Fpng",
+      "isPublicChat" : true,
+      "names" : {
+        "name_1" : "CBS Feminist Society",
+        "name_2" : false
+      }
+    },
+    "ter25532fe" : {
+      "createdDate" : 1619193951375,
+      "image" : "https://cdn.vox-cdn.com/thumbor/Zz5I08Bvcjs9j_AbBK_L4ZoWnbE=/1400x0/filters:no_upscale()/cdn.vox-cdn.com/uploads/chorus_asset/file/19216619/000024.jpg",
+      "isPublicChat" : false,
+      "names" : {
+        "name_1" : "Jeremy",
+        "name_2" : "Marco"
+      }
+    }
+  },
+  "events" : {
+    "fewaewa12" : {
+      "authorImage" : false,
+      "description" : false,
+      "endDate" : 1619506488341,
+      "location" : "Husets Biograf, Rådhusstræde 13, 1466 København",
+      "organization" : "CBS Film",
+      "postType" : "event",
+      "startDate" : 1619506428341,
+      "thumbnail" : "https://images-na.ssl-images-amazon.com/images/S/sgp-catalog-images/region_US/lt5wv-MDAZM7NW98P-Full-Image_GalleryBackground-en-US-1601076926833._SX1080_.jpg",
+      "title" : "Christmas with CBS Yoga"
+    },
+    "gankjnew12" : {
+      "authorImage" : "https://media.licdn.com/dms/image/C4D0BAQF8X8ZdYUCrYg/company-logo_200_200/0?e=2159024400&v=beta&t=tBkHnT3BdTCy0NfNM5Rosqd9L9tWdTf9eFfgJ0jpd78",
+      "description" : false,
+      "endDate" : false,
+      "location" : false,
+      "organization" : "CBS Investment Club",
+      "postType" : "blog",
+      "startDate" : false,
+      "thumbnail" : false,
+      "title" : "Tesla turns a profit on bitcoin sale, but its ‘Technoking’ and ‘Master of Coin’ say it won’t become a habit"
+    },
+    "safeml124" : {
+      "authorImage" : "https://i.pinimg.com/originals/00/6f/e7/006fe7f785c991102866b859a4b6be7e.jpg",
+      "description" : "Description of the organization. Something which can be expanded if the user whishes to see more of it. This is just a snippet of the text.",
+      "endDate" : false,
+      "location" : false,
+      "organization" : "CBS Jam",
+      "postType" : "organization",
+      "startDate" : false,
+      "thumbnail" : "https://cdn.britannica.com/19/1919-050-E3CBE7A5/Oliver-Creole-Jazz-Band-Chicago-1923.jpg",
+      "title" : false
+    },
+    "uidsanl123" : {
+      "authorImage" : false,
+      "description" : false,
+      "endDate" : 1619507428341,
+      "location" : "Dalgas Have, 2000 Frederiksberg",
+      "organization" : "CBS Yoga",
+      "postType" : "event",
+      "startDate" : 1619506428341,
+      "thumbnail" : "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/gettyimages-526082066-1583447550.png",
+      "title" : "Easter with CBS Yoga"
+    }
+  },
+  "messages" : {
+    "dfdsaw124zx" : {
+      "chatId" : "ter25532fe",
+      "createdDate" : 1619189319144,
+      "isPublicChat" : false,
+      "message" : "Hey, what's up?",
+      "userIds" : {
+        "id_from" : "-MYtPtxDMiNv3-AfpSWh",
+        "id_to" : "-MYyrgufsNbCkgXTD7Fx"
+      }
+    },
+    "jnfewia172" : {
+      "chatId" : "fioaenu293",
+      "createdDate" : 1619189519244,
+      "isPublicChat" : true,
+      "message" : "Hey, pretty interested in surfing.",
+      "read" : false,
+      "userIds" : {
+        "id_from" : "-MYyrgufsNbCkgXTD7Fx",
+        "id_to" : false
+      }
+    },
+    "kjdna32fn" : {
+      "chatId" : "fioaenu293",
+      "createdDate" : 1619189319244,
+      "isPublicChat" : true,
+      "message" : "Hello, me too!",
+      "read" : true,
+      "userIds" : {
+        "id_from" : "-MYtPtxDMiNv3-AfpSWh",
+        "id_to" : false
+      }
+    },
+    "onofnawu124" : {
+      "chatId" : "ter25532fe",
+      "createdDate" : 1619182319144,
+      "isPublicChat" : false,
+      "message" : "All good, you?",
+      "userIds" : {
+        "id_from" : "-MYyrgufsNbCkgXTD7Fx",
+        "id_to" : "-MYtPtxDMiNv3-AfpSWh"
+      }
+    },
+    "vdsa231342" : {
+      "chatId" : "ew8jka718",
+      "createdDate" : 1619189319148,
+      "isPublicChat" : false,
+      "message" : "What's up?",
+      "userIds" : {
+        "id_from" : "-MYtPtxDMiNv3-AfpSWh",
+        "id_to" : "-MYyrgufsNbCkgXTD7Fx"
+      }
+    }
+  },
+  "users" : {
+    "-MYtPtxDMiNv3-AfpSWh" : {
+      "additionalPublicIdentity" : 0,
+      "chatNotification" : false,
+      "email" : "michalla@yahoo.com",
+      "id" : "rwd6uxdVcYeNIQmVLMRGQcUeKkl1",
+      "image" : "https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3.png",
+      "name" : "Michalla",
+      "title" : ""
+    },
+    "-MYyrL0-_4ntqXnVjfP9" : {
+      "additionalPublicIdentity" : 0,
+      "chatNotification" : false,
+      "email" : "brigitta1234@yahoo.com",
+      "id" : "Nmw1F6ZB5iTTYp8r1N28ntKLkh13",
+      "image" : "https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3.png",
+      "name" : "Brig",
+      "title" : ""
+    },
+    "-MYyrgufsNbCkgXTD7Fx" : {
+      "additionalPublicIdentity" : 0,
+      "chatNotification" : false,
+      "email" : "brigitta12345@yahoo.com",
+      "id" : "mdqflX5xhyT6EhVoc1TnZdbQe8w1",
+      "image" : "https://pwco.com.sg/wp-content/uploads/2020/05/Generic-Profile-Placeholder-v3.png",
+      "name" : "Brig02324e",
+      "title" : "MSc in Business Administration and E-business"
+    }
+  }
+}
