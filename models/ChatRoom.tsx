@@ -4,11 +4,13 @@ interface ChatRoomInterface {
     name: string;
     name_2: string | boolean;
     image: string;
-    chatMessages: string[];
+    chatMessages: ChatMessageInterface[] | string[];
     isPublicChat: boolean;
     lastMessage: string;
     lastMessageDate: number;
 }
+
+import { default as ChatMessageInterface } from './ChatMessage';
 
 export type { ChatRoomInterface };
 
@@ -18,7 +20,7 @@ class ChatRoom implements ChatRoomInterface  {
     name: string;
     name_2: string | boolean;
     image: string;
-    chatMessages: string[];
+    chatMessages: ChatMessageInterface[] | string[];
     isPublicChat: boolean;
     lastMessage: string;
     lastMessageDate: number;
@@ -28,7 +30,7 @@ class ChatRoom implements ChatRoomInterface  {
                 name: string, 
                 name_2: string | boolean, 
                 image: string, 
-                chatMessages: [], 
+                chatMessages: ChatMessageInterface[] | string[], 
                 isPublicChat: boolean) {
         this.id = id;
         this.createdDate = createdDate;

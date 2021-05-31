@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 // COMPONENTS
 import Input from '../../../components/UI/Input';
 // MODELS
-import UserResult from './UserResult/UserResult';
+import UserResult from './UserResult/UserResult.tsx';
 import PrivateUser from '../../../models/PrivateUser.tsx';
 import CustomButton from '../../../components/UI/Button';
 // OTHERS

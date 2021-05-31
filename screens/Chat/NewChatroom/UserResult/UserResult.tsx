@@ -13,21 +13,29 @@ import ChatRoom from '../../../../models/ChatRoom.tsx';
 import { uuid } from 'uuidv4';
 import { chatSearchStyles } from './styles';
 
-const UserResult = (props) => {
+import { default as ChatRoomInterface } from '../../../../models/ChatRoom'; 
+import { default as ChatMessageInterface } from '../../../../models/ChatMessage'; 
+
+interface UserResultProps {
+    id: string,
+    name: string
+}
+
+const UserResult: React.FC<UserResultProps> = (props: UserResultProps) => {
+
     const navigation = useNavigation();
-    const chats = useSelector((state) => state.ChatReducer.privateChats);
-    const userSessionName = useSelector((state) => state.UserReducer.userSession.name);
+    const chats = useSelector((state: any) => state.ChatReducer.privateChats);
+    const userSessionName = useSelector((state: any) => state.UserReducer.userSession.name);
 
     const handleSetChatroom = () => {
         // console.log(props.item);
 
         // Check if the users have previously chatted
-        var chatroom = false;
+        var chatroom: boolean | ChatRoomInterface = false;
 
-        chats.forEach(chat => {
-            chat.chatMessages.forEach(message => {
-                console.log(message);
-                console.log(props.id);
+        chats.forEach((chat: ChatRoomInterface) => {
+            chat.chatMessages.forEach((message: any)  => {
+
                 if(message.userFrom === props.id || message.userTo === props.id) {
                     
                     chatroom = chat;
@@ -36,7 +44,7 @@ const UserResult = (props) => {
             })
         })
 
-        if(chatroom !== false) {
+        if(chatroom !== false && chatroom !== null) {
             // If yes import chat room and navigate
             // console.log(chatroom);
             chatroom = new ChatRoom(chatroom.id,

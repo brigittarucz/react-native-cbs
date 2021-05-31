@@ -19,7 +19,6 @@ interface ChatRoomProps {
 // we use generics, which allow to define functions and classes
 // that can work with a set of types
 const ChatRoom: React.FC<ChatRoomProps> = (props): JSX.Element => {
-    console.log(props);
     return (
         <View style={chatRoomStyles.container}>
             <View style={chatRoomStyles.containerMessage}>

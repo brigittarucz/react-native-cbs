@@ -139,7 +139,7 @@ const ChatMessage = props => {
                 data={newMessages}
                 extraData={triggerRerender}
                 renderItem={itemData => {
-                    return <Text>You have received a new message!</Text>
+                    return <Text style={{opacity: 0}}>You have received a new message!</Text>
                     // return <ChatTo data={itemData.item} key={itemData.index.toString()}/>
                 }}   
                 keyExtractor={item => item.id.toString()} /> 
